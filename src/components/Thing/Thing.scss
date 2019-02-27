@@ -1,0 +1,21 @@
+.thing {
+  font-size: 1.25rem;
+  font-weight: 300;
+  background: white;
+  padding: 1em;
+  border: 2px solid var(--primary);
+  border-radius: .25em;
+  width: 80%;
+}
+
+.thing--complete {
+  border-color: var(--seatgeek-blue);
+}
+
+.thing--noncomplete {
+  border-color: var(--primary);
+}
+
+.thing + .thing {
+  margin-top: 1em;
+}
