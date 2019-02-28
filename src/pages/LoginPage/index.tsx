@@ -11,7 +11,7 @@ export default function LoginPage() {
     <Page>
       <Title>One Thing</Title>
       <Subtitle>
-        One thing you want to do today, together with others at{" "}
+        One thing you want to do this week, together with others at{" "}
         <span className="seatgeek-blue">SeatGeek</span>.
       </Subtitle>
       <div className="example-container">
@@ -21,7 +21,7 @@ export default function LoginPage() {
           complete
         />
         <Thing
-          text="Chat with someone who's given an OKR presentation to get some tips for my first OKR presentation tomorrow."
+          text="Chat with someone who's given an OKR presentation to get some tips for my first OKR presentation."
           person={people[1]}
           complete
         />
@@ -31,7 +31,7 @@ export default function LoginPage() {
         />
         <Thing
           person={people[3]}
-          text="Learn what PRISM is. (It's my first week!)"
+          text="Learn what PRISM is. (It's my first month!)"
         />
         <Thing
           person={people[4]}
