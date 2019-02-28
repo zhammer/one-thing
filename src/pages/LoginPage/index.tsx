@@ -1,10 +1,10 @@
 import React from "react";
-import "./LoginPage.scss";
 import Page from "../../components/Page";
 import Title from "../../components/Title";
 import Subtitle from "../../components/Subtitle";
 import Thing from "../../components/Thing";
 import Button from "../../components/Button";
+import { ExampleContainer, ButtonContainer, SeatGeekBlue } from "./LoginPage.styles";
 
 export default function LoginPage() {
   return (
@@ -12,9 +12,9 @@ export default function LoginPage() {
       <Title>One Thing</Title>
       <Subtitle>
         One thing you want to do this week, together with others at{" "}
-        <span className="seatgeek-blue">SeatGeek</span>.
+        <SeatGeekBlue>SeatGeek</SeatGeekBlue>.
       </Subtitle>
-      <div className="example-container">
+      <ExampleContainer>
         <Thing
           text="Clean up 10 old tickets on gitlab."
           person={people[0]}
@@ -37,10 +37,10 @@ export default function LoginPage() {
           person={people[4]}
           text="Figure out what caused several SGO transfers to fail over the weekend."
         />
-      </div>
-      <div className="button-container">
+      </ExampleContainer>
+      <ButtonContainer>
         <Button type="primary">Sign in with Gmail</Button>
-      </div>
+      </ButtonContainer>
     </Page>
   );
 }
