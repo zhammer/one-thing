@@ -4,10 +4,11 @@
   font-size: 1.25rem;
   font-weight: 300;
   background: white;
-  padding: 1em;
+  padding: .75em 1em;
   border: 2px solid var(--primary);
   border-radius: .25em;
   width: 80%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.075);
 }
 
 .thing--complete {
@@ -43,7 +44,7 @@
   color: var(--secondary);
   font-size: .8rem;
   margin-top: .75em;
-  transition: all .5s ease;
+  transition: color .5s ease;
 
 }
 
@@ -55,7 +56,7 @@
   fill: var(--secondary);
   height: 1em;
   margin-left: .5em;
-  transition:  all .5s ease;
+  transition: fill .5s ease;
 }
 
 .thing__contact:hover svg {

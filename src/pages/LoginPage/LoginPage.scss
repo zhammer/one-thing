@@ -22,7 +22,7 @@
   margin-bottom: 3em;
 }
 
-.example-container * {
+.example-container > * {
   animation: 1s fadedrop ease both;
 }
 
