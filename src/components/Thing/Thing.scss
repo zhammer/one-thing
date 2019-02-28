@@ -29,3 +29,35 @@
   align-self: center;
   flex-shrink: 0;
 }
+
+.thing__body {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+}
+
+.thing__contact {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--secondary);
+  font-size: .8rem;
+  margin-top: .75em;
+  transition: all .5s ease;
+
+}
+
+.thing__contact:hover {
+  color: var(--seatgeek-blue);
+}
+
+.thing__contact svg {
+  fill: var(--secondary);
+  height: 1em;
+  margin-left: .5em;
+  transition:  all .5s ease;
+}
+
+.thing__contact:hover svg {
+  fill: var(--seatgeek-blue);
+}

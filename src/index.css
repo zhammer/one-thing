@@ -5,6 +5,8 @@ body {
   --highlight: #ebebec;
   --seatgeek-blue: #1673e6;
 
+  box-sizing: border-box;
+
   margin: 0;
   padding: 0;
 
