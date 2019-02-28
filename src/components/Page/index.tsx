@@ -1,14 +1,9 @@
-import React from 'react';
-import './Page.scss';
+import styled from '../../custom/styled-components';
 
-interface PageProps {
-    children: React.ReactNode;
-}
+const Page = styled.div`
+  width: 55%;
+  margin: 0 auto;
+  height: 100vh;
+`;
 
-export default function Page({ children }: PageProps) {
-    return (
-        <div className='page'>
-            {children}
-        </div>
-    )
-}
+export default Page;
