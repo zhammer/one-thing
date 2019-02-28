@@ -20,15 +20,15 @@
   align-items: center;
 
   margin-bottom: 3em;
-}
 
-.example-container > * {
-  animation: 1s fadedrop ease both;
-}
+  & > * {
+    animation: 1s fadedrop ease both;
+  }
 
-@for $i from 1 to 10 {
-  .example-container > *:nth-child(#{$i}) {
-    animation-delay: (($i - 1) * 3s) + .3s;
+  @for $i from 1 to 10 {
+    & > *:nth-child(#{$i}) {
+      animation-delay: (($i - 1) * 3s) + .3s;
+    }
   }
 }
 

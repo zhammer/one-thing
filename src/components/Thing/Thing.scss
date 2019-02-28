@@ -9,6 +9,10 @@
   border-radius: .25em;
   width: 80%;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.075);
+
+  & + & {
+    margin-top: 1em;
+  }
 }
 
 .thing--complete {
@@ -17,10 +21,6 @@
 
 .thing--noncomplete {
   border-color: var(--primary);
-}
-
-.thing + .thing {
-  margin-top: 1em;
 }
 
 .thing__checkmark {
@@ -46,19 +46,18 @@
   margin-top: .75em;
   transition: color .5s ease;
 
-}
+  &:hover {
+    color: var(--seatgeek-blue);
+  }
 
-.thing__contact:hover {
-  color: var(--seatgeek-blue);
-}
+  & svg {
+    fill: var(--secondary);
+    height: 1em;
+    margin-left: .5em;
+    transition: fill .5s ease;
+  }
 
-.thing__contact svg {
-  fill: var(--secondary);
-  height: 1em;
-  margin-left: .5em;
-  transition: fill .5s ease;
-}
-
-.thing__contact:hover svg {
-  fill: var(--seatgeek-blue);
+  &:hover svg {
+    fill: var(--seatgeek-blue);
+  }
 }

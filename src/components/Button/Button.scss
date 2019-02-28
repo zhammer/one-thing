@@ -7,10 +7,10 @@
   padding: .5em 2em;
   border-radius: .25em;
   cursor: pointer;
-}
 
-.btn:hover {
-  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.2);
+  &:hover {
+    box-shadow: 0 12px 22px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .btn--primary {
