@@ -1,7 +1,6 @@
 import React from "react";
-import "./Thing.scss";
-import Checkmark from "../Checkmark";
 import Email from "../Email";
+import { Container, Body, Contact, CheckmarkBadge } from "./Thing.styles";
 
 interface Person {
   firstName: string;
@@ -16,15 +15,15 @@ interface ThingProps {
 
 export default function Thing({ text, complete = false, person }: ThingProps) {
   return (
-    <div className={`thing thing--${complete ? "complete" : "noncomplete"}`}>
-      <div className="thing__body">
-        <div className="thing__text">{text}</div>
-        <div className="thing__contact">
-          {makePersonName(person)} <Email className='email-icon' />
-        </div>
-      </div>
-      {complete && <Checkmark className="thing__checkmark" />}
-    </div>
+    <Container complete={complete}>
+      <Body>
+        <div>{text}</div>
+        <Contact>
+          {makePersonName(person)} <Email />
+        </Contact>
+      </Body>
+      {complete && <CheckmarkBadge />}
+    </Container>
   );
 }
 
