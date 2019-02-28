@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from "../../custom/styled-components";
 
 const fadedrop = keyframes`
   from {
@@ -36,5 +36,5 @@ export const ButtonContainer = styled.div`
 `
 
 export const SeatGeekBlue = styled.span`
-  color: var(--seatgeek-blue);
+  color: ${props => props.theme.seatgeekBlue};
 `
