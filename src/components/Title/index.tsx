@@ -1,14 +1,12 @@
-import React from 'react';
-import './Title.scss';
+import styled from "../../custom/styled-components";
 
-interface TitleProps {
-  children: React.ReactNode;
-}
+const Title = styled.h1`
+  color: ${props => props.theme.primary};
+  font-family: 'Dancing Script', cursive;
+  text-align: center;
+  font-size: 6rem;
+  margin: 0;
+  padding: .75em 0 .25em;
+`;
 
-export default function Title({ children }: TitleProps) {
-  return (
-    <div className='title'>
-      <h1>{children}</h1>
-    </div>
-  )
-}
+export default Title;
