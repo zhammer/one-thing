@@ -25,7 +25,7 @@ export const Container = styled.div<ContainerProps>`
 export const Body = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: space-between;
+  align-items: flex-start;
 `;
 
 export const Contact = styled.div`
