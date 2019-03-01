@@ -39,7 +39,7 @@ export default function LoginPage() {
         />
       </ExampleContainer>
       <ButtonContainer>
-        <Button type="primary">Sign in with Gmail</Button>
+        <Button.Primary>Sign in with Gmail</Button.Primary>
       </ButtonContainer>
     </Page>
   );
