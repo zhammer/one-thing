@@ -1,32 +1,26 @@
 import React from "react";
 import Email from "../Email";
 import { Container, Body, Contact, CheckmarkBadge } from "./Thing.styles";
-
-interface Person {
-  firstName: string;
-  lastName: string;
-}
+import { ThingInterface, PersonInterface } from "../../types";
 
 interface ThingProps {
-  text: string;
-  complete?: boolean;
-  person: Person;
+  thing: ThingInterface;
 }
 
-export default function Thing({ text, complete = false, person }: ThingProps) {
+export default function Thing({ thing }: ThingProps) {
   return (
-    <Container complete={complete}>
+    <Container complete={thing.complete}>
       <Body>
-        <div>{text}</div>
+        <div>{thing.description}</div>
         <Contact>
-          {makePersonName(person)} <Email />
+          {makePersonName(thing.person)} <Email />
         </Contact>
       </Body>
-      {complete && <CheckmarkBadge />}
+      {thing.complete && <CheckmarkBadge />}
     </Container>
   );
 }
 
-function makePersonName(person: Person) {
+function makePersonName(person: PersonInterface) {
   return person.firstName + ' ' + person.lastName.charAt(0);
 }
