@@ -12,12 +12,16 @@ const fadedrop = keyframes`
 `;
 
 export const ExampleContainer = styled.div`
-  margin-top: 3em;
+  margin-top: 2em;
+  margin-bottom: 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  margin-bottom: 3em;
+  @media screen and (min-width: 35em) {
+    margin-top: 3em;
+    margin-bottom: 3em;
+  }
 
   & > * {
     animation: 1s ${fadedrop} ease both;

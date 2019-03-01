@@ -8,7 +8,7 @@ interface ContainerProps {
 export const Container = styled.div<ContainerProps>`
   display: flex;
   justify-content: space-between;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 300;
   background: white;
   padding: .75em 1em;
@@ -17,8 +17,15 @@ export const Container = styled.div<ContainerProps>`
   width: 80%;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.075);
 
+  @media screen and (min-width: 35em) {
+    font-size: 1.25rem;
+  }
+
   & + & {
-    margin-top: 1em;
+    margin-top: .75em;
+    @media screen and (min-width: 35em) {
+      margin-top: 1em;
+    }
   }
 `;
 
