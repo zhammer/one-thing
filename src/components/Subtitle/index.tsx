@@ -1,14 +1,12 @@
-import React from 'react';
-import './Subtitle.scss';
+import styled from "../../custom/styled-components";
 
-interface SubtitleProps {
-  children: React.ReactNode;
-}
+const Subtitle = styled.h2`
+  color: ${props => props.theme.secondary};
+  font-size: 1.5rem;
+  font-weight: 200;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+`;
 
-export default function Subtitle({ children }: SubtitleProps) {
-  return (
-    <div className='subtitle'>
-      <h2>{children}</h2>
-    </div>
-  )
-}
+export default Subtitle;

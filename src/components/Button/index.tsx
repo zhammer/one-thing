@@ -1,14 +1,25 @@
-import React from 'react';
-import './Button.scss';
+import styled from "../../custom/styled-components";
 
-interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
-  type: 'primary' | 'secondary';
-}
+const Base = styled.button`
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.075);
+  transition: box-shadow 0.15s;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1.25rem;
+  padding: 0.5em 2em;
+  border-radius: 0.25em;
+  cursor: pointer;
 
-export default function Button({ children, type, ...rest }: ButtonProps) {
-  return (
-    <button className={`btn btn--${type}`} {...rest} >
-      {children}
-    </button>
-  )
-}
+  &:hover {
+    box-shadow: 0 12px 22px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const Primary = styled(Base)`
+  color: white;
+  background: ${props => props.theme.seatgeekBlue};
+`;
+
+export default {
+  Primary
+};
