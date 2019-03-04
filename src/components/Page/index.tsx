@@ -1,9 +1,16 @@
 import styled from '../../custom/styled-components';
 import { mobileBreakpoint, navbarWidth } from '../../styles/variables';
+import { keyframes } from 'styled-components';
+
+const fadein = keyframes`
+  from { opacity: 0 }
+  to   { opacity: 1 }
+`
 
 const Base = styled.div`
   width: 55%;
   margin: 0 auto;
+  animation: ${fadein} .25s linear both;
 `;
 
 const WithoutNav = styled(Base)``;
