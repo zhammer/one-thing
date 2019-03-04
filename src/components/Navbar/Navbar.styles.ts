@@ -1,32 +1,38 @@
 import styled from "../../custom/styled-components";
 import { navbarWidth, mobileBreakpoint, mobileNavbarHeight } from "../../styles/variables";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   position: fixed;
-  display: flex;
   z-index: 101;
 
   height: ${mobileNavbarHeight};
   bottom: 0;
   left: 0;
   right: 0;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0 1em;
   box-shadow: 0 -2px 5px rgba(0,0,0,.05);
 
   @media screen and (min-width: ${mobileBreakpoint}) {
     width: ${navbarWidth};
-    padding: 2em 2em;
-    flex-direction: column;
-    justify-content: normal;
     height: auto;
-    width: ${navbarWidth};
     top: 0;
     bottom: 0;
     left: 0;
     right: auto;
     box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
+  }
+`;
+
+export const Content = styled.div`
+  padding: 0 1em;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  @media screen and (min-width: ${mobileBreakpoint}) {
+    padding: 2em 2em;
+    flex-direction: column;
+    justify-content: normal;
   }
 `;
 
@@ -38,7 +44,8 @@ export const Label = styled.div`
   letter-spacing: 0.1rem;
 `;
 
-const NavItemBase = styled.div`
+const NavItemBase = styled(Link)`
+  text-decoration: none;
   color: ${props => props.theme.secondaryLight};
   fill: ${props => props.theme.secondaryLight};
   text-align: center;
@@ -68,13 +75,13 @@ const NavItemLogo = styled(NavItemBase)`
   }
 `;
 
-interface IsActiveProps {
-  isActive?: boolean;
+interface ActiveProps {
+  active?: boolean;
 }
 
-const NavItemIcon = styled(NavItemBase)<IsActiveProps>`
-  color: ${props => props.isActive ? props.theme.secondary : props.theme.secondaryLight};
-  fill: ${props => props.isActive ? props.theme.secondary : props.theme.secondaryLight};
+const NavItemIcon = styled(NavItemBase)<ActiveProps>`
+  color: ${props => props.active ? props.theme.secondary : props.theme.secondaryLight};
+  fill: ${props => props.active ? props.theme.secondary : props.theme.secondaryLight};
   display: flex;
   flex-direction: column;
   align-items: center;

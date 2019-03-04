@@ -1,23 +1,28 @@
 import React from "react";
-import { Container, NavItem,  Label } from "./Navbar.styles";
+import { Container, NavItem,  Label, Content } from "./Navbar.styles";
 import Icon from "../Icon";
+import { withRouter, RouteChildrenProps } from "react-router";
 
-export default function Navbar() {
+function Navbar({ location }: RouteChildrenProps) {
   return (
     <Container>
-      <NavItem.Logo>One Thing</NavItem.Logo>
-      <NavItem.Icon>
-        <Icon.Avatar />
-        <Label>Me</Label>
-      </NavItem.Icon>
-      <NavItem.Icon>
-        <Icon.Sofa />
-        <Label>SeatGeek</Label>
-      </NavItem.Icon>
-      <NavItem.Icon>
-        <Icon.Gear />
-        <Label>Settings</Label>
-      </NavItem.Icon>
+      <Content>
+        <NavItem.Logo to='/about'>One Thing</NavItem.Logo>
+        <NavItem.Icon to='/me' active={location.pathname === '/me'}>
+          <Icon.Avatar />
+          <Label>Me</Label>
+        </NavItem.Icon>
+        <NavItem.Icon to='/seatgeek' active={location.pathname === '/seatgeek'}>
+          <Icon.Sofa />
+          <Label>SeatGeek</Label>
+        </NavItem.Icon>
+        <NavItem.Icon to='/settings' active={location.pathname === '/settings'}>
+          <Icon.Gear />
+          <Label>Settings</Label>
+        </NavItem.Icon>
+      </Content>
     </Container>
   );
 }
+
+export default withRouter(Navbar);
