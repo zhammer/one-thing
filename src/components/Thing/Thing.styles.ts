@@ -1,5 +1,6 @@
 import styled from "../../custom/styled-components";
 import Icon from "../Icon";
+import { mobileBreakpoint } from "../../styles/variables";
 
 interface ContainerProps {
   complete: boolean;
@@ -17,13 +18,13 @@ export const Container = styled.div<ContainerProps>`
   width: 80%;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.075);
 
-  @media screen and (min-width: 35em) {
+  @media screen and (min-width: ${mobileBreakpoint}) {
     font-size: 1.25rem;
   }
 
   & + & {
     margin-top: .75em;
-    @media screen and (min-width: 35em) {
+    @media screen and (min-width: ${mobileBreakpoint}) {
       margin-top: 1em;
     }
   }

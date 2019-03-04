@@ -1,4 +1,5 @@
 import styled, { keyframes } from "../../custom/styled-components";
+import { mobileBreakpoint } from "../../styles/variables";
 
 const fadedrop = keyframes`
   from {
@@ -18,7 +19,7 @@ export const ExampleContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media screen and (min-width: 35em) {
+  @media screen and (min-width: ${mobileBreakpoint}) {
     margin-top: 3em;
     margin-bottom: 3em;
   }
