@@ -1,5 +1,5 @@
 import React from "react";
-import Email from "../Email";
+import Icon from "../Icon";
 import { Container, Body, Contact, CheckmarkBadge } from "./Thing.styles";
 import { ThingInterface, PersonInterface } from "../../types";
 
@@ -13,7 +13,7 @@ export default function Thing({ thing }: ThingProps) {
       <Body>
         <div>{thing.description}</div>
         <Contact>
-          {makePersonName(thing.person)} <Email />
+          {makePersonName(thing.person)} <Icon.Email />
         </Contact>
       </Body>
       {thing.complete && <CheckmarkBadge />}

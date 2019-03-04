@@ -1,5 +1,5 @@
 import styled from "../../custom/styled-components";
-import Checkmark from "../Checkmark";
+import Icon from "../Icon";
 
 interface ContainerProps {
   complete: boolean;
@@ -53,7 +53,7 @@ export const Contact = styled.div`
   }
 `;
 
-export const CheckmarkBadge = styled(Checkmark)`
+export const CheckmarkBadge = styled(Icon.Checkmark)`
   height: 1.5em;
   width: 1.5em;
   fill: ${props => props.theme.seatgeekBlue};

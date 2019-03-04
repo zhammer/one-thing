@@ -1,9 +1,26 @@
 import styled from '../../custom/styled-components';
+import { mobileBreakpoint, navbarWidth } from '../../styles/variables';
+import { keyframes } from 'styled-components';
 
-const Page = styled.div`
+const fadein = keyframes`
+  from { opacity: 0 }
+  to   { opacity: 1 }
+`
+
+const Base = styled.div`
   width: 55%;
   margin: 0 auto;
-  height: 100vh;
+  animation: ${fadein} .25s linear both;
 `;
 
-export default Page;
+const WithoutNav = styled(Base)``;
+const BesideNav = styled(Base)`
+  @media screen and (min-width: ${mobileBreakpoint}) {
+    padding: 0 0 0 ${navbarWidth};
+  }
+`;
+
+export default {
+  BesideNav,
+  WithoutNav,
+}

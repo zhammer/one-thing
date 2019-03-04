@@ -9,21 +9,21 @@ import { ThingInterface } from "../../types";
 
 export default function LoginPage() {
   return (
-    <Page>
+    <Page.WithoutNav>
       <Title>One Thing</Title>
       <Subtitle>
         One thing you want to do this week, together with others at{" "}
         <SeatGeekBlue>SeatGeek</SeatGeekBlue>.
       </Subtitle>
       <ExampleContainer>
-        {things.map(thing => (
-          <Thing thing={thing} />
+        {things.map((thing, index) => (
+          <Thing thing={thing} key={index} />
         ))}
       </ExampleContainer>
       <ButtonContainer>
         <Button.Primary>Sign in with Gmail</Button.Primary>
       </ButtonContainer>
-    </Page>
+    </Page.WithoutNav>
   );
 }
 
