@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 export const Container = styled.div`
   position: fixed;
   z-index: 101;
+  background: white;
 
   height: ${mobileNavbarHeight};
   bottom: 0;
