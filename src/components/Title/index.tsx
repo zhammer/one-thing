@@ -7,7 +7,7 @@ const Title = styled.h1`
   text-align: center;
   font-size: 4rem;
   margin: 0;
-  padding: .6em 0 .1em;
+  padding: .3em 0 .1em;
 
   @media screen and (min-width: ${mobileBreakpoint}) {
     padding: .75em 0 .25em;
