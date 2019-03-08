@@ -1,4 +1,4 @@
-Feature: Redirect to LoginPage
+Feature: Redirect to Login Page
   If am not logged in and I visit any page that requires authentication
   or I visit an unknown route, I should be redirected to the /login page.
 
