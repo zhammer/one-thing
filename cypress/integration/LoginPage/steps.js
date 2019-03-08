@@ -8,9 +8,9 @@ Given("I am on the login page", () => {
 
 Then(`I can see a button that says {string}`, buttonText => {
   cy.get("button")
+    .as("loginButton")
     .should("contain", buttonText)
-    .should("be.visible")
-    .as("loginButton");
+    .and("be.visible");
 });
 
 Then("I can click the button", () => {
