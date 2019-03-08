@@ -11,6 +11,7 @@ const Base = styled.div`
   width: 90%;
   margin: 0 auto;
   animation: ${fadein} .25s linear both;
+  margin-bottom: 2em;
 
   @media screen and (min-width: ${mobileBreakpoint}) {
     width: 55%;
