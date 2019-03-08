@@ -4,7 +4,7 @@ import { ThemeProvider } from "./custom/styled-components";
 import theme from "./styles/theme";
 import { GlobalStyle } from "./App.styles";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-import AuthenticatedApp from "./pages/AuthenticatedApp";
+import AuthenticatedApp from "./AuthenticatedApp";
 
 export default function App() {
   return (
