@@ -2,9 +2,9 @@ import { useQuery } from "react-apollo-hooks";
 import gql from "graphql-tag";
 
 const IS_LOGGED_IN = gql`
- query {
-  isLoggedIn @client
- }
+  query {
+    isLoggedIn @client
+  }
 `;
 
 /**
