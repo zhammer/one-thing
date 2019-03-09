@@ -4,20 +4,24 @@ import { ThemeProvider } from "./custom/styled-components";
 import theme from "./styles/theme";
 import { GlobalStyle } from "./App.styles";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import { ApolloProvider } from 'react-apollo-hooks';
 import AuthenticatedApp from "./AuthenticatedApp";
+import { client } from "./apollo";
 
 export default function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <>
-        <GlobalStyle />
-        <Router>
-          <Switch>
-            <Route exact path="/login" component={LoginPage} />
-            <Route path='/' component={AuthenticatedApp} />
-          </Switch>
-        </Router>
-      </>
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <>
+          <GlobalStyle />
+          <Router>
+            <Switch>
+              <Route exact path="/login" component={LoginPage} />
+              <Route path='/' component={AuthenticatedApp} />
+            </Switch>
+          </Router>
+        </>
+      </ThemeProvider>
+    </ApolloProvider>
   );
 }
