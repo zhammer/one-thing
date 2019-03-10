@@ -9,6 +9,9 @@ const typeDefs = gql`
   extend type Query {
     isLoggedIn: Boolean!
   }
+  extend type Mutation {
+    logOut: null
+  }
 `;
 
 /**
@@ -27,6 +30,12 @@ cache.writeData({
 const resolvers: Resolvers = {
   Query: {
     isLoggedIn: (_, __, { cache }) => cache.isLoggedIn,
+  },
+  Mutation: {
+    logOut: (_, __, { cache }) => {
+      localStorage.removeItem('accessToken');
+      cache.writeData({ data: { isLoggedIn: false }});
+    }
   },
 }
 
