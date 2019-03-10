@@ -43,6 +43,7 @@ jobs:
 workflows:
   build:
     jobs:
+      - lint-client
       - build-client
       - cypress-tests:
           requires:
