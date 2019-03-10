@@ -50,6 +50,8 @@
   "devDependencies": {
     "cypress": "^3.1.5",
     "cypress-cucumber-preprocessor": "^1.11.0",
+    "prettier": "^1.16.4",
+    "prettylint": "^1.0.0",
     "serve": "^10.1.2"
   }
 }
