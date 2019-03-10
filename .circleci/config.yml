@@ -27,7 +27,7 @@ jobs:
           name: Run cypress tests
           command: >-
             yarn run cypress run --reporter junit
-            --reporter-options "mochaFile=test-results/cypress/results.xml"
+            --reporter-options "mochaFile=test-results/cypress/results.[hash].xml"
       - store_test_results:
           path: test-results
       - store_artifacts:
