@@ -4,10 +4,10 @@ import { Route, Redirect } from "react-router";
 import MePage from "./pages/MePage";
 import SeatGeekPage from "./pages/SeatGeekPage";
 import SettingsPage from "./pages/SettingsPage";
-import useLoggedIn from "./hooks/useLoggedIn";
+import useLoginStatus from "./hooks/useLoginStatus";
 
 export default function AuthenticatedApp() {
-  const loggedIn = useLoggedIn();
+  const [loggedIn] = useLoginStatus();
 
   return !loggedIn ? (
     <Redirect to="/login" />
