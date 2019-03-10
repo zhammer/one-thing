@@ -43,6 +43,10 @@
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true
   },
+  "prettier": {
+    "tabWidth": 2,
+    "singleQuote": true
+  },
   "devDependencies": {
     "cypress": "^3.1.5",
     "cypress-cucumber-preprocessor": "^1.11.0",
