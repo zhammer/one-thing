@@ -11,7 +11,7 @@ import { ThingInterface } from "../../types";
 export default function LoginPage() {
   const things = isMobile ? mobileThings : allThings;
   return (
-    <Page.WithoutNav>
+    <Page.Full>
       <Title>One Thing</Title>
       <Subtitle>
         One thing you want to do this week, together with others at{" "}
@@ -25,7 +25,7 @@ export default function LoginPage() {
       <ButtonContainer>
         <Button.Primary>Sign in with Gmail</Button.Primary>
       </ButtonContainer>
-    </Page.WithoutNav>
+    </Page.Full>
   );
 }
 
