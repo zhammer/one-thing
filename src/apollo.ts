@@ -22,22 +22,22 @@ cache.writeData({
   data: {
     isLoggedIn: Boolean(localStorage.getItem('accessToken'))
   }
-})
+});
 
 /**
  * RESOLVERS
  */
 const resolvers: Resolvers = {
   Query: {
-    isLoggedIn: (_, __, { cache }) => cache.isLoggedIn,
+    isLoggedIn: (_, __, { cache }) => cache.isLoggedIn
   },
   Mutation: {
     logOut: (_, __, { cache }) => {
       localStorage.removeItem('accessToken');
-      cache.writeData({ data: { isLoggedIn: false }});
+      cache.writeData({ data: { isLoggedIn: false } });
     }
-  },
-}
+  }
+};
 
 /**
  * CLIENT
@@ -45,5 +45,5 @@ const resolvers: Resolvers = {
 export const client = new ApolloClient({
   cache,
   resolvers,
-  typeDefs,
+  typeDefs
 });

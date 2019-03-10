@@ -1,5 +1,5 @@
-import styled, { keyframes } from "../../custom/styled-components";
-import { mobileBreakpoint } from "../../styles/variables";
+import styled, { keyframes } from '../../custom/styled-components';
+import { mobileBreakpoint } from '../../styles/variables';
 
 const fadedrop = keyframes`
   from {
@@ -28,18 +28,20 @@ export const ExampleContainer = styled.div`
     animation: 1s ${fadedrop} ease both;
   }
 
-  ${[0,1,2,3,4,5].map(i => `
+  ${[0, 1, 2, 3, 4, 5].map(
+    i => `
     & > *:nth-child(${i}) {
-      animation-delay: ${((i - 1) * 3) + .3}s;
+      animation-delay: ${(i - 1) * 3 + 0.3}s;
     }
-  `)}
+  `
+  )}
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-`
+`;
 
 export const SeatGeekBlue = styled.span`
   color: ${props => props.theme.seatgeekBlue};
-`
+`;

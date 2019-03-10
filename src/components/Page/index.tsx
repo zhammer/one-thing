@@ -5,12 +5,12 @@ import { keyframes } from 'styled-components';
 const fadein = keyframes`
   from { opacity: 0 }
   to   { opacity: 1 }
-`
+`;
 
 const Base = styled.div`
   width: 90%;
   margin: 0 auto;
-  animation: ${fadein} .25s linear both;
+  animation: ${fadein} 0.25s linear both;
   margin-bottom: 2em;
 
   @media screen and (min-width: ${mobileBreakpoint}) {
@@ -27,5 +27,5 @@ const BesideNav = styled(Base)`
 
 export default {
   BesideNav,
-  Full,
-}
+  Full
+};

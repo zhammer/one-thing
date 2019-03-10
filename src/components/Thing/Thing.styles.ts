@@ -1,6 +1,6 @@
-import styled from "../../custom/styled-components";
-import Icon from "../Icon";
-import { mobileBreakpoint } from "../../styles/variables";
+import styled from '../../custom/styled-components';
+import Icon from '../Icon';
+import { mobileBreakpoint } from '../../styles/variables';
 
 interface ContainerProps {
   complete: boolean;
@@ -12,9 +12,11 @@ export const Container = styled.div<ContainerProps>`
   font-size: 1rem;
   font-weight: 300;
   background: white;
-  padding: .75em 1em;
-  border: 2px solid ${props => props.complete ? props.theme.seatgeekBlue : props.theme.primary};
-  border-radius: .25em;
+  padding: 0.75em 1em;
+  border: 2px solid
+    ${props =>
+      props.complete ? props.theme.seatgeekBlue : props.theme.primary};
+  border-radius: 0.25em;
   width: 80%;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.075);
 
@@ -23,7 +25,7 @@ export const Container = styled.div<ContainerProps>`
   }
 
   & + & {
-    margin-top: .75em;
+    margin-top: 0.75em;
     @media screen and (min-width: ${mobileBreakpoint}) {
       margin-top: 1em;
     }
@@ -41,9 +43,9 @@ export const Contact = styled.div`
   align-items: center;
   cursor: pointer;
   color: ${props => props.theme.secondary};
-  font-size: .8rem;
-  margin-top: .75em;
-  transition: color .5s ease;
+  font-size: 0.8rem;
+  margin-top: 0.75em;
+  transition: color 0.5s ease;
 
   &:hover {
     color: ${props => props.theme.seatgeekBlue};
@@ -52,8 +54,8 @@ export const Contact = styled.div`
   & svg {
     fill: ${props => props.theme.secondary};
     height: 1em;
-    margin-left: .5em;
-    transition: fill .5s ease;
+    margin-left: 0.5em;
+    transition: fill 0.5s ease;
   }
 
   &:hover svg {

@@ -1,5 +1,5 @@
-import styled from "../../custom/styled-components";
-import { mobileBreakpoint } from "../../styles/variables";
+import styled from '../../custom/styled-components';
+import { mobileBreakpoint } from '../../styles/variables';
 
 const Subtitle = styled.h2`
   color: ${props => props.theme.secondary};
