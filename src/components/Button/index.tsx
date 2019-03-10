@@ -20,6 +20,12 @@ const Primary = styled(Base)`
   background: ${props => props.theme.seatgeekBlue};
 `;
 
+const Danger = styled(Base)`
+  color: white;
+  background: ${props => props.theme.danger};
+`;
+
 export default {
-  Primary
+  Danger,
+  Primary,
 };

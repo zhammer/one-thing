@@ -7,6 +7,7 @@ export interface ThemeInterface {
   background: string;
   highlight: string;
   seatgeekBlue: string;
+  danger: string;
 }
 
 const theme: ThemeInterface = {
@@ -16,6 +17,7 @@ const theme: ThemeInterface = {
   background: '#fbfbfb',
   highlight: '#ebebec',
   seatgeekBlue: '#1673e6',
+  danger: '#f22b29',
 }
 
 export default theme;
