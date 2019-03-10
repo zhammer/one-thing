@@ -1,4 +1,4 @@
-import styled from "../../custom/styled-components";
+import styled from '../../custom/styled-components';
 
 export const ButtonContainer = styled.div`
   display: flex;

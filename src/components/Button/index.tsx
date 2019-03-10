@@ -1,4 +1,4 @@
-import styled from "../../custom/styled-components";
+import styled from '../../custom/styled-components';
 
 const Base = styled.button`
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.075);
@@ -27,5 +27,5 @@ const Danger = styled(Base)`
 
 export default {
   Danger,
-  Primary,
+  Primary
 };

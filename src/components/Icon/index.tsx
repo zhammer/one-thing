@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type SVGProps = React.SVGProps<SVGSVGElement>;
 

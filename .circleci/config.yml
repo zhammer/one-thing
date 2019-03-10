@@ -1,6 +1,13 @@
 version: 2.1
 
 jobs:
+  lint-client:
+    executor: node-executor
+    steps:
+      - checkout
+      - install-node-dependencies
+      - run: yarn run prettylint "src/**/*.[jt]s?(x)"
+
   build-client:
     executor: node-executor
     steps:
@@ -36,6 +43,7 @@ jobs:
 workflows:
   build:
     jobs:
+      - lint-client
       - build-client
       - cypress-tests:
           requires:

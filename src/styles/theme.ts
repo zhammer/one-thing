@@ -13,11 +13,11 @@ export interface ThemeInterface {
 const theme: ThemeInterface = {
   primary: '#2c2c34',
   secondary: '#3f3f46',
-  secondaryLight: lighten(.40, '#3f3f46'),
+  secondaryLight: lighten(0.4, '#3f3f46'),
   background: '#fbfbfb',
   highlight: '#ebebec',
   seatgeekBlue: '#1673e6',
-  danger: '#f22b29',
-}
+  danger: '#f22b29'
+};
 
 export default theme;

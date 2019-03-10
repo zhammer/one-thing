@@ -1,12 +1,12 @@
-import React from "react";
-import LoginPage from "./pages/LoginPage";
-import { ThemeProvider } from "./custom/styled-components";
-import theme from "./styles/theme";
-import { GlobalStyle } from "./App.styles";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import React from 'react';
+import LoginPage from './pages/LoginPage';
+import { ThemeProvider } from './custom/styled-components';
+import theme from './styles/theme';
+import { GlobalStyle } from './App.styles';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo-hooks';
-import AuthenticatedApp from "./AuthenticatedApp";
-import { client } from "./apollo";
+import AuthenticatedApp from './AuthenticatedApp';
+import { client } from './apollo';
 
 export default function App() {
   return (
@@ -17,7 +17,7 @@ export default function App() {
           <Router>
             <Switch>
               <Route exact path="/login" component={LoginPage} />
-              <Route path='/' component={AuthenticatedApp} />
+              <Route path="/" component={AuthenticatedApp} />
             </Switch>
           </Router>
         </>

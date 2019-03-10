@@ -1,7 +1,7 @@
-import React from "react";
-import Icon from "../Icon";
-import { Container, Body, Contact, CheckmarkBadge } from "./Thing.styles";
-import { ThingInterface, PersonInterface } from "../../types";
+import React from 'react';
+import Icon from '../Icon';
+import { Container, Body, Contact, CheckmarkBadge } from './Thing.styles';
+import { ThingInterface, PersonInterface } from '../../types';
 
 interface ThingProps {
   thing: ThingInterface;

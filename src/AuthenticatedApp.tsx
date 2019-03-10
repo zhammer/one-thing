@@ -1,10 +1,10 @@
-import React from "react";
-import Navbar from "./components/Navbar";
-import { Route, Redirect } from "react-router";
-import MePage from "./pages/MePage";
-import SeatGeekPage from "./pages/SeatGeekPage";
-import SettingsPage from "./pages/SettingsPage";
-import useLoginStatus from "./hooks/useLoginStatus";
+import React from 'react';
+import Navbar from './components/Navbar';
+import { Route, Redirect } from 'react-router';
+import MePage from './pages/MePage';
+import SeatGeekPage from './pages/SeatGeekPage';
+import SettingsPage from './pages/SettingsPage';
+import useLoginStatus from './hooks/useLoginStatus';
 
 export default function AuthenticatedApp() {
   const [loggedIn] = useLoginStatus();

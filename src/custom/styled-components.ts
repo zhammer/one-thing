@@ -1,5 +1,5 @@
-import * as styledComponents from "styled-components";
-import { ThemeInterface } from "../styles/theme";
+import * as styledComponents from 'styled-components';
+import { ThemeInterface } from '../styles/theme';
 
 const {
   default: styled,
@@ -7,7 +7,9 @@ const {
   createGlobalStyle,
   keyframes,
   ThemeProvider
-} = styledComponents as styledComponents.ThemedStyledComponentsModule<ThemeInterface>;
+} = styledComponents as styledComponents.ThemedStyledComponentsModule<
+  ThemeInterface
+>;
 
 export { css, createGlobalStyle, keyframes, ThemeProvider };
 export default styled;

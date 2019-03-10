@@ -1,6 +1,10 @@
-import styled from "../../custom/styled-components";
-import { navbarWidth, mobileBreakpoint, mobileNavbarHeight } from "../../styles/variables";
-import { Link } from "react-router-dom";
+import styled from '../../custom/styled-components';
+import {
+  navbarWidth,
+  mobileBreakpoint,
+  mobileNavbarHeight
+} from '../../styles/variables';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   position: fixed;
@@ -11,7 +15,7 @@ export const Container = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  box-shadow: 0 -2px 5px rgba(0,0,0,.05);
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
 
   @media screen and (min-width: ${mobileBreakpoint}) {
     width: ${navbarWidth};
@@ -66,7 +70,7 @@ const NavItemBase = styled(Link)`
 `;
 
 const NavItemLogo = styled(NavItemBase)`
-  font-family: "Dancing Script", cursive;
+  font-family: 'Dancing Script', cursive;
   color: ${props => props.theme.seatgeekBlue};
   font-size: 1.5rem;
 
@@ -81,8 +85,10 @@ interface ActiveProps {
 }
 
 const NavItemIcon = styled(NavItemBase)<ActiveProps>`
-  color: ${props => props.active ? props.theme.secondary : props.theme.secondaryLight};
-  fill: ${props => props.active ? props.theme.secondary : props.theme.secondaryLight};
+  color: ${props =>
+    props.active ? props.theme.secondary : props.theme.secondaryLight};
+  fill: ${props =>
+    props.active ? props.theme.secondary : props.theme.secondaryLight};
   display: flex;
   flex-direction: column;
   align-items: center;
