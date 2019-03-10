@@ -1,0 +1,63 @@
+version: 2.1
+
+jobs:
+  build-client:
+    executor: node-executor
+    steps:
+      - checkout
+      - install-node-dependencies
+      - run: yarn build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - build
+
+  cypress-tests:
+    executor: cypress-executor
+    steps:
+      - checkout
+      - install-node-dependencies
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Run server
+          command: yarn run serve -s build
+          background: true
+      - run:
+          name: Run cypress tests
+          command: >-
+            yarn run cypress run --reporter junit
+            --reporter-options "mochaFile=test-results/cypress/results.[hash].xml"
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: cypress/videos
+
+workflows:
+  build:
+    jobs:
+      - build-client
+      - cypress-tests:
+          requires:
+            - build-client
+
+executors:
+  node-executor:
+    docker:
+      - image: circleci/node:10
+    working_directory: ~/project
+  cypress-executor:
+    docker:
+      - image: cypress/base:10
+    working_directory: ~/project
+
+commands:
+  install-node-dependencies:
+    steps:
+      - restore_cache:
+          keys:
+            - node-cache-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: node-cache-{{ checksum "yarn.lock" }}
+          paths: node_modules
