@@ -18,7 +18,7 @@ const Base = styled.div`
   }
 `;
 
-const WithoutNav = styled(Base)``;
+const Full = styled(Base)``;
 const BesideNav = styled(Base)`
   @media screen and (min-width: ${mobileBreakpoint}) {
     padding: 0 0 0 ${navbarWidth};
@@ -27,5 +27,5 @@ const BesideNav = styled(Base)`
 
 export default {
   BesideNav,
-  WithoutNav,
+  Full,
 }
