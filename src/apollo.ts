@@ -18,23 +18,17 @@ const typeDefs = gql`
  * CACHE
  */
 const cache = new InMemoryCache();
-cache.writeData({
-  data: {
-    isLoggedIn: Boolean(localStorage.getItem('accessToken'))
-  }
-});
 
 /**
  * RESOLVERS
  */
 const resolvers: Resolvers = {
   Query: {
-    isLoggedIn: (_, __, { cache }) => cache.isLoggedIn
+    isLoggedIn: () => Boolean(localStorage.getItem('accessToken'))
   },
   Mutation: {
-    logOut: (_, __, { cache }) => {
+    logOut: () => {
       localStorage.removeItem('accessToken');
-      cache.writeData({ data: { isLoggedIn: false } });
     }
   }
 };
