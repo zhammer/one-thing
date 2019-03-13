@@ -7,7 +7,7 @@ beforeEach(() => {
 });
 
 Given("I am logged in", () => {
-  localStorage.setItem("accessToken", "cypress_access_token");
+  cy.then(() => { localStorage.setItem("accessToken", "cypress_access_token") });
 });
 
 Given("I am on the settings page", () => {
