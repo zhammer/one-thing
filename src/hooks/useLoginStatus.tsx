@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 
 const IS_LOGGED_IN = gql`
   query {
-    isLoggedIn @client
+    isLoggedIn @client(always: true)
   }
 `;
 
