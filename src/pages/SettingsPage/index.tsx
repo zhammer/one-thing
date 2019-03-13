@@ -8,11 +8,11 @@ import { ButtonContainer } from './SettingsPage.styles';
 export default function SettingsPage() {
   const [_, logout] = useLoginStatus();
   return (
-    <Page.BesideNav>
+    <Page>
       <Title>Settings</Title>
       <ButtonContainer>
         <Button.Danger onClick={logout}>Log out</Button.Danger>
       </ButtonContainer>
-    </Page.BesideNav>
+    </Page>
   );
 }

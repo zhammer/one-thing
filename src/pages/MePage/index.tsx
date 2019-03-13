@@ -4,8 +4,8 @@ import Title from '../../components/Title';
 
 export default function MePage() {
   return (
-    <Page.BesideNav>
+    <Page>
       <Title>This week</Title>
-    </Page.BesideNav>
+    </Page>
   );
 }
