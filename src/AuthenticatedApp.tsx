@@ -5,6 +5,7 @@ import MePage from './pages/MePage';
 import SeatGeekPage from './pages/SeatGeekPage';
 import SettingsPage from './pages/SettingsPage';
 import useLoginStatus from './hooks/useLoginStatus';
+import BesideNav from './components/BesideNav';
 
 export default function AuthenticatedApp() {
   const [loggedIn] = useLoginStatus();
@@ -14,9 +15,11 @@ export default function AuthenticatedApp() {
   ) : (
     <>
       <Navbar />
-      <Route exact path="/me" component={MePage} />
-      <Route exact path="/seatgeek" component={SeatGeekPage} />
-      <Route exact path="/settings" component={SettingsPage} />
+      <BesideNav>
+        <Route exact path="/me" component={MePage} />
+        <Route exact path="/seatgeek" component={SeatGeekPage} />
+        <Route exact path="/settings" component={SettingsPage} />
+      </BesideNav>
     </>
   );
 }

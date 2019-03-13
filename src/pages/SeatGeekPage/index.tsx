@@ -4,8 +4,8 @@ import Title from '../../components/Title';
 
 export default function SeatGeekPage() {
   return (
-    <Page.BesideNav>
+    <Page>
       <Title>SeatGeek</Title>
-    </Page.BesideNav>
+    </Page>
   );
 }
