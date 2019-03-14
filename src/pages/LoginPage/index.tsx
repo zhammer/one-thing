@@ -22,8 +22,8 @@ export default function LoginPage() {
         <SeatGeekBlue>SeatGeek</SeatGeekBlue>.
       </Subtitle>
       <ExampleContainer>
-        {things.map((thing, index) => (
-          <Thing thing={thing} key={index} />
+        {things.map(thing => (
+          <Thing thing={thing} key={thing.id} />
         ))}
       </ExampleContainer>
       <ButtonContainer>
@@ -35,28 +35,33 @@ export default function LoginPage() {
 
 const allThings: ThingInterface[] = [
   {
+    id: '1',
     description: 'Clean up 10 old tickets on gitlab.',
     person: { firstName: 'Rufus', lastName: 'SeatGeek' },
     complete: true
   },
   {
+    id: '2',
     description:
       "Chat with someone who's given an OKR presentation to get some tips for my first OKR presentation.",
     person: { firstName: 'Simone', lastName: 'Biles' },
     complete: true
   },
   {
+    id: '3',
     description:
       'Enjoy the nice weather with a coworker for lunch at washington square park.',
     person: { firstName: 'Peyton', lastName: 'Manning' },
     complete: false
   },
   {
+    id: '4',
     description: "Learn what PRISM is. (It's my first month!)",
     person: { firstName: 'Janis', lastName: 'Joplin' },
     complete: false
   },
   {
+    id: '5',
     description:
       'Figure out what caused several SGO transfers to fail over the weekend.',
     person: { firstName: 'Zacarias', lastName: 'Ferreira' },
