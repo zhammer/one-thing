@@ -22,3 +22,10 @@ Feature: SeatGeek Page
     And I see the subtitle "Here are the things people at SeatGeek want to do this week!"
     And I see all the submitted things
 
+  Scenario: There is an error fetching this week's Things
+    Given there is a problem with the server
+    When I visit the SeatGeek page
+    Then I see the title "SeatGeek"
+    And I see the subtitle "There was an error."
+
+

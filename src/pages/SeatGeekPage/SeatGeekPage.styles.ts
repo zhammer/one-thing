@@ -18,3 +18,8 @@ export const ThingContainer = styled.div`
     `
   )}
 `;
+
+export const Danger = styled.span`
+  font-weight: bold;
+  color: ${props => props.theme.danger};
+`;

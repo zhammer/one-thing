@@ -7,7 +7,7 @@ import gql from 'graphql-tag';
 import { useQuery } from 'react-apollo-hooks';
 import { ThingInterface } from '../../types';
 import Thing from '../../components/Thing';
-import { ThingContainer } from './SeatGeekPage.styles';
+import { ThingContainer, Danger } from './SeatGeekPage.styles';
 
 const GET_THIS_WEEK_SEATGEEK_THINGS = gql`
   query SeatGeekThingsThisWeek {
@@ -41,7 +41,9 @@ export default function SeatGeekPage() {
       ) : (
         <>
           <Subtitle>
-            {things.length > 0 ? (
+            {error ? (
+              <Danger>There was an error.</Danger>
+            ) : things.length > 0 ? (
               <>
                 Here are the things people at{' '}
                 <SeatGeekBlue>SeatGeek</SeatGeekBlue> want to do this week!

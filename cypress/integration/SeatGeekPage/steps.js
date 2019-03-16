@@ -33,6 +33,16 @@ Given('the following things have been submitted this week:', dataTable => {
   });
 });
 
+Given('there is a problem with the server', () => {
+  cy.mockGraphqlOps({
+    operations: {
+      SeatGeekThingsThisWeek: {
+        errors: ['Internal error.']
+      }
+    }
+  });
+});
+
 When('I visit the SeatGeek page', () => {
   cy.visit('/seatgeek');
 });
