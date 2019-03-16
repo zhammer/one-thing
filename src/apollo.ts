@@ -1,6 +1,9 @@
 import gql from 'graphql-tag';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient, Resolvers } from 'apollo-client';
+import { createHttpLink } from 'apollo-link-http';
+
+const GRAPHQL_ENDPOINT = process.env.REACT_APP_GRAPHQL_ENDPOINT || '/graphql';
 
 /**
  * TYPE DEFS
@@ -40,10 +43,21 @@ const resolvers: Resolvers = {
 };
 
 /**
+ * LINK
+ */
+const link = createHttpLink({
+  uri: GRAPHQL_ENDPOINT,
+  headers: {
+    authorization: localStorage.getItem('accessToken')
+  }
+});
+
+/**
  * CLIENT
  */
 export const client = new ApolloClient({
   cache,
+  link,
   resolvers,
   typeDefs
 });
