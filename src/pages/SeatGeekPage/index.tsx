@@ -7,7 +7,7 @@ import gql from 'graphql-tag';
 import { useQuery } from 'react-apollo-hooks';
 import { ThingInterface } from '../../types';
 import Thing from '../../components/Thing';
-import { ThingContainer, Danger } from './SeatGeekPage.styles';
+import { ThingsContainer, Danger } from './SeatGeekPage.styles';
 
 const GET_THIS_WEEK_SEATGEEK_THINGS = gql`
   query SeatGeekThingsThisWeek {
@@ -56,11 +56,11 @@ export default function SeatGeekPage() {
             )}
           </Subtitle>
           {things.length > 0 && (
-            <ThingContainer data-class-name="thing-container">
+            <ThingsContainer data-class-name="things-container">
               {things.map(thing => (
                 <Thing key={thing.id} thing={thing} />
               ))}
-            </ThingContainer>
+            </ThingsContainer>
           )}
         </>
       )}

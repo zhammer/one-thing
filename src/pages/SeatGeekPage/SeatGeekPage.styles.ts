@@ -1,7 +1,7 @@
 import styled from '../../custom/styled-components';
 import { fadedrop } from '../../styles/animations';
 
-export const ThingContainer = styled.div`
+export const ThingsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

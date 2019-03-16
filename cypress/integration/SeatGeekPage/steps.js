@@ -49,7 +49,7 @@ When('I visit the SeatGeek page', () => {
 
 Then('I see all the submitted things', () => {
   cy.get('@things').then(things => {
-    cy.get('div[data-class-name=thing-container]')
+    cy.get('div[data-class-name=things-container]')
       .children()
       .should('have.length', things.length)
       .each((thingComponent, i) => {
