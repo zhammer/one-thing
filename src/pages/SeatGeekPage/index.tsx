@@ -54,7 +54,7 @@ export default function SeatGeekPage() {
             )}
           </Subtitle>
           {things.length > 0 && (
-            <ThingContainer data-class-name='thing-container'>
+            <ThingContainer data-class-name="thing-container">
               {things.map(thing => (
                 <Thing key={thing.id} thing={thing} />
               ))}

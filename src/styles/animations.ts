@@ -1,4 +1,4 @@
-import { keyframes } from "../custom/styled-components";
+import { keyframes } from '../custom/styled-components';
 
 export const fadedrop = keyframes`
   from {
