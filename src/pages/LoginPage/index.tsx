@@ -5,12 +5,9 @@ import Subtitle from '../../components/Subtitle';
 import Thing from '../../components/Thing';
 import Button from '../../components/Button';
 import { isMobile } from 'react-device-detect';
-import {
-  ExampleContainer,
-  ButtonContainer,
-  SeatGeekBlue
-} from './LoginPage.styles';
+import { ExampleContainer, ButtonContainer } from './LoginPage.styles';
 import { ThingInterface } from '../../types';
+import SeatGeekBlue from '../../components/SeatGeekBlue';
 
 export default function LoginPage() {
   const things = isMobile ? mobileThings : allThings;
