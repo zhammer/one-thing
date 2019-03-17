@@ -40,6 +40,7 @@ export const Body = styled.div`
 
 export const Contact = styled.a`
   display: flex;
+  text-decoration: none;
   align-items: center;
   cursor: pointer;
   color: ${props => props.theme.secondary};
