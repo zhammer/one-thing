@@ -29,9 +29,17 @@ const GET_THIS_WEEK_SEATGEEK_THINGS = gql`
   }
 `;
 
+interface Data {
+  seatGeekThingsThisWeek: {
+    edges: [{ thing: ThingInterface }];
+  };
+}
+
 export default function SeatGeekPage() {
-  const { data, error, loading } = useQuery(GET_THIS_WEEK_SEATGEEK_THINGS);
-  const things: ThingInterface[] = pluckThings(data);
+  const { data, error, loading } = useQuery<Data>(
+    GET_THIS_WEEK_SEATGEEK_THINGS
+  );
+  const things = useMemo(() => pluckThings(data), [data]);
 
   return (
     <Page>
@@ -68,8 +76,10 @@ export default function SeatGeekPage() {
   );
 }
 
-function pluckThings(data: any): ThingInterface[] {
-  const edges =
-    data.seatGeekThingsThisWeek && data.seatGeekThingsThisWeek.edges;
-  return edges ? edges.map((edge: any) => edge.thing) : [];
+function pluckThings(data: Data | undefined): ThingInterface[] {
+  if (!data || !data.seatGeekThingsThisWeek) {
+    return [];
+  }
+  const edges = data.seatGeekThingsThisWeek.edges;
+  return edges ? edges.map(edge => edge.thing) : [];
 }
