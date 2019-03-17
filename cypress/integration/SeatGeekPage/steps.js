@@ -66,6 +66,19 @@ Then('I see all the submitted things', () => {
   });
 });
 
+Then(`there is a contact link that says {string}`, text => {
+  cy.contains('a', text).as('contactLink');
+});
+
+Then(
+  `the contact link opens an email to {string} with the subject {string}`,
+  (email, subject) => {
+    cy.get('@contactLink')
+      .should('have.attr', 'href')
+      .and('equal', `mailto:${email}?subject=${subject}`);
+  }
+);
+
 function pluckThings(rawTable) {
   return rawTable.hashes().map(rawThing => ({
     id: rawThing.id,
@@ -73,6 +86,7 @@ function pluckThings(rawTable) {
     complete: rawThing.complete === 'true',
     createdAt: rawThing.createdAt,
     person: {
+      email: rawThing.email,
       firstName: rawThing.firstName,
       lastName: rawThing.lastName
     }
