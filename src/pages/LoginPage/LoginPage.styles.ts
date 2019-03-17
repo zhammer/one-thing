@@ -1,16 +1,6 @@
-import styled, { keyframes } from '../../custom/styled-components';
+import styled from '../../custom/styled-components';
 import { mobileBreakpoint } from '../../styles/variables';
-
-const fadedrop = keyframes`
-  from {
-    transform: translate3d(0,-4px,0);
-    opacity: 0;
-  }
-  to {
-    transform: translateZ(0);
-    opacity: 1;
-  }
-`;
+import { fadedrop } from '../../styles/animations';
 
 export const ExampleContainer = styled.div`
   margin-top: 2em;
@@ -40,8 +30,4 @@ export const ExampleContainer = styled.div`
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-`;
-
-export const SeatGeekBlue = styled.span`
-  color: ${props => props.theme.seatgeekBlue};
 `;

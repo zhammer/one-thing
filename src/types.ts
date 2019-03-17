@@ -4,6 +4,7 @@ export interface PersonInterface {
 }
 
 export interface ThingInterface {
+  id: string;
   person: PersonInterface;
   description: string;
   complete: boolean;

@@ -12,6 +12,8 @@
     "@types/styled-components": "^4.1.11",
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-client": "^2.5.1",
+    "apollo-link-http": "^1.5.12",
+    "cypress-graphql-mock": "^0.1.1",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "polished": "^3.0.3",
@@ -48,7 +50,7 @@
     "singleQuote": true
   },
   "devDependencies": {
-    "cypress": "^3.1.5",
+    "cypress": "^3.2.0",
     "cypress-cucumber-preprocessor": "^1.11.0",
     "prettier": "^1.16.4",
     "prettylint": "^1.0.0",
