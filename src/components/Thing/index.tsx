@@ -26,5 +26,5 @@ function makePersonName(person: PersonInterface) {
 }
 
 function makeMailToHref(thing: ThingInterface): string {
-  return `mailto:${thing.person.email}?subject=Re: ${thing.description}`
+  return `mailto:${thing.person.email}?subject=Re: ${thing.description}`;
 }
