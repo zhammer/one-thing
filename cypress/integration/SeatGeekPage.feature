@@ -28,4 +28,10 @@ Feature: SeatGeek Page
     Then I see the title "SeatGeek"
     And I see the subtitle "There was an error."
 
-
+  Scenario: I want to email a Person who posted a Thing
+    Given the following things have been submitted this week:
+      | id | firstName | lastName | description                | email     | complete | createdAt           |
+      | 1  | Zach      | Hammer   | Learn about interviewing.  | zh@sg.com | false    | 2019-03-16T00:10:15 |
+    When I visit the SeatGeek page
+    Then there is a contact link that says "Zach H"
+    And the contact link opens an email to "zh@sg.com" with the subject "Re: Learn about interviewing."
