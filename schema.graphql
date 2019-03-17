@@ -40,7 +40,13 @@ type PageInfo {
   endCursor: String
 }
 
+type MutationResult {
+  success: Boolean!
+}
+
 type Query {
   seatGeekThingsThisWeek: ThingConnection!
   me: Person!
 }
+
+type Mutation
