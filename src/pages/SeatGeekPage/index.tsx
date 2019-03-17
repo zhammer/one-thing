@@ -39,7 +39,7 @@ export default function SeatGeekPage() {
   const { data, error, loading } = useQuery<Data>(
     GET_THIS_WEEK_SEATGEEK_THINGS
   );
-  const things: ThingInterface[] = data ? pluckThings(data) : [];
+  const things = useMemo(() => pluckThings(data), [data]);
 
   return (
     <Page>
@@ -76,8 +76,10 @@ export default function SeatGeekPage() {
   );
 }
 
-function pluckThings(data: Data): ThingInterface[] {
-  const edges =
-    data.seatGeekThingsThisWeek && data.seatGeekThingsThisWeek.edges;
+function pluckThings(data: Data | undefined): ThingInterface[] {
+  if (!data || !data.seatGeekThingsThisWeek) {
+    return [];
+  }
+  const edges = data.seatGeekThingsThisWeek.edges;
   return edges ? edges.map(edge => edge.thing) : [];
 }
