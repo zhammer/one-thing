@@ -34,34 +34,54 @@ const allThings: ThingInterface[] = [
   {
     id: '1',
     description: 'Clean up 10 old tickets on gitlab.',
-    person: { firstName: 'Rufus', lastName: 'SeatGeek' },
+    person: {
+      firstName: 'Rufus',
+      lastName: 'SeatGeek',
+      email: 'rs@seatgeek.com'
+    },
     complete: true
   },
   {
     id: '2',
     description:
       "Chat with someone who's given an OKR presentation to get some tips for my first OKR presentation.",
-    person: { firstName: 'Simone', lastName: 'Biles' },
+    person: {
+      firstName: 'Simone',
+      lastName: 'Biles',
+      email: 'sb@seatgeek.com'
+    },
     complete: true
   },
   {
     id: '3',
     description:
       'Enjoy the nice weather with a coworker for lunch at washington square park.',
-    person: { firstName: 'Peyton', lastName: 'Manning' },
+    person: {
+      firstName: 'Peyton',
+      lastName: 'Manning',
+      email: 'pm@seatgeek.com'
+    },
     complete: false
   },
   {
     id: '4',
     description: "Learn what PRISM is. (It's my first month!)",
-    person: { firstName: 'Janis', lastName: 'Joplin' },
+    person: {
+      firstName: 'Janis',
+      lastName: 'Joplin',
+      email: 'jj@seatgeek.com'
+    },
     complete: false
   },
   {
     id: '5',
     description:
       'Figure out what caused several SGO transfers to fail over the weekend.',
-    person: { firstName: 'Zacarias', lastName: 'Ferreira' },
+    person: {
+      firstName: 'Zacarias',
+      lastName: 'Ferreira',
+      email: 'zf@seatgeek.com'
+    },
     complete: false
   }
 ];

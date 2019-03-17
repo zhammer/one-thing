@@ -55,10 +55,17 @@ Then('I see all the submitted things', () => {
       .each((thingComponent, i) => {
         const thing = things[i];
         cy.wrap(thingComponent).contains(thing.description);
-        cy.wrap(thingComponent).contains(
-          'a',
-          thing.person.firstName + ' ' + thing.person.lastName.charAt(0)
-        );
+        cy.wrap(thingComponent)
+          .contains(
+            'a',
+            thing.person.firstName + ' ' + thing.person.lastName.charAt(0)
+          )
+          .click()
+          .should('have.attr', 'href')
+          .and(
+            'equal',
+            `mailto:${thing.person.email}?subject=Re: ${thing.description}`
+          );
         cy.wrap(thingComponent)
           .find('svg[data-class-name=icon-checkmark]')
           .should(thing.complete ? 'exist' : 'not.exist');
@@ -73,6 +80,7 @@ function pluckThings(rawTable) {
     complete: rawThing.complete === 'true',
     createdAt: rawThing.createdAt,
     person: {
+      email: rawThing.email,
       firstName: rawThing.firstName,
       lastName: rawThing.lastName
     }

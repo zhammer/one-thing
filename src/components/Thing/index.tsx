@@ -12,7 +12,7 @@ export default function Thing({ thing }: ThingProps) {
     <Container complete={thing.complete}>
       <Body>
         <div>{thing.description}</div>
-        <Contact>
+        <Contact href={makeMailToHref(thing)}>
           {makePersonName(thing.person)} <Icon.Email />
         </Contact>
       </Body>
@@ -23,4 +23,8 @@ export default function Thing({ thing }: ThingProps) {
 
 function makePersonName(person: PersonInterface) {
   return person.firstName + ' ' + person.lastName.charAt(0);
+}
+
+function makeMailToHref(thing: ThingInterface): string {
+  return `mailto:${thing.person.email}?subject=Re: ${thing.description}`
 }
