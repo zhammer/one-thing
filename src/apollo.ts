@@ -12,7 +12,7 @@ const typeDefs = gql`
   extend type Query {
     isLoggedIn: Boolean!
   }
-  extend type Mutation {
+  type Mutation {
     logOut: MutationResult!
   }
 `;

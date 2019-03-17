@@ -40,6 +40,7 @@ export default function SeatGeekPage() {
     GET_THIS_WEEK_SEATGEEK_THINGS
   );
   const things = useMemo(() => pluckThings(data), [data]);
+  error && console.log(error);
 
   return (
     <Page>
