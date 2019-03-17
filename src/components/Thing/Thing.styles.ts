@@ -38,7 +38,7 @@ export const Body = styled.div`
   align-items: flex-start;
 `;
 
-export const Contact = styled.div`
+export const Contact = styled.a`
   display: flex;
   align-items: center;
   cursor: pointer;
