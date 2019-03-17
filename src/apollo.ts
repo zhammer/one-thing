@@ -13,7 +13,7 @@ const typeDefs = gql`
     isLoggedIn: Boolean!
   }
   extend type Mutation {
-    logOut: null
+    logOut: MutationResult!
   }
 `;
 
@@ -38,6 +38,7 @@ const resolvers: Resolvers = {
     logOut: (_, __, { cache }) => {
       localStorage.removeItem('accessToken');
       cache.writeData({ data: { isLoggedIn: false } });
+      return { success: true };
     }
   }
 };
