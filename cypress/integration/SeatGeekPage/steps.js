@@ -54,8 +54,8 @@ Then('I see all the submitted things', () => {
       .should('have.length', things.length)
       .each((thingComponent, i) => {
         const thing = things[i];
-        expect(thingComponent).to.contain(thing.description);
-        expect(thingComponent).to.contain(
+        cy.wrap(thingComponent).contains(thing.description);
+        cy.wrap(thingComponent).contains(
           'a',
           thing.person.firstName + ' ' + thing.person.lastName.charAt(0)
         );
