@@ -79,5 +79,5 @@ export default function SeatGeekPage() {
 function pluckThings(data: Data): ThingInterface[] {
   const edges =
     data.seatGeekThingsThisWeek && data.seatGeekThingsThisWeek.edges;
-  return edges ? edges.map((edge: any) => edge.thing) : [];
+  return edges ? edges.map(edge => edge.thing) : [];
 }
