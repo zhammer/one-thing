@@ -2,14 +2,16 @@ import { useQuery, useMutation } from 'react-apollo-hooks';
 import gql from 'graphql-tag';
 
 const IS_LOGGED_IN = gql`
-  query {
+  query IsLoggedIn {
     isLoggedIn @client
   }
 `;
 
 const LOG_OUT = gql`
-  mutation {
-    logOut @client
+  mutation LogOut {
+    logOut @client {
+      success
+    }
   }
 `;
 
