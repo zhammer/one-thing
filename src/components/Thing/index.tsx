@@ -9,7 +9,7 @@ interface ThingProps {
 
 export default function Thing({ thing }: ThingProps) {
   return (
-    <Container complete={thing.complete}>
+    <Container complete={thing.complete} data-class-name='thing'>
       <Body>
         <div>{thing.description}</div>
         <Contact href={makeMailToHref(thing)}>

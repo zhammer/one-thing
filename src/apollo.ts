@@ -11,9 +11,11 @@ const GRAPHQL_ENDPOINT = process.env.REACT_APP_GRAPHQL_ENDPOINT || '/graphql';
 const typeDefs = gql`
   extend type Query {
     isLoggedIn: Boolean!
+    thingInputForm: String!
   }
-  type Mutation {
+  extend type Mutation {
     logOut: MutationResult!
+    setThingInputForm(text: String!): MutationResult!
   }
 `;
 
@@ -23,7 +25,8 @@ const typeDefs = gql`
 const cache = new InMemoryCache();
 cache.writeData({
   data: {
-    isLoggedIn: Boolean(localStorage.getItem('accessToken'))
+    isLoggedIn: Boolean(localStorage.getItem('accessToken')),
+    thingInputForm: '',
   }
 });
 
@@ -38,6 +41,10 @@ const resolvers: Resolvers = {
     logOut: (_, __, { cache }) => {
       localStorage.removeItem('accessToken');
       cache.writeData({ data: { isLoggedIn: false } });
+      return { success: true };
+    },
+    setThingInputForm: (_, data, { cache }) => {
+      cache.writeData({ data: { thingInputForm: data.text }});
       return { success: true };
     }
   }
