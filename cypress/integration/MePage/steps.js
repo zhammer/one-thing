@@ -26,7 +26,9 @@ When('I visit the Me page', () => {
 });
 
 When('I click on the Thing input form', () => {
-  cy.get('textarea[data-class-name=thing-input-form').as('thingInputForm');
+  cy.get('textarea[data-class-name=thing-input-form')
+    .as('thingInputForm')
+    .click();
 });
 
 When(`I type {string}`, text => {
