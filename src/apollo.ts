@@ -26,7 +26,7 @@ const cache = new InMemoryCache();
 cache.writeData({
   data: {
     isLoggedIn: Boolean(localStorage.getItem('accessToken')),
-    thingInputForm: '',
+    thingInputForm: ''
   }
 });
 
@@ -44,7 +44,7 @@ const resolvers: Resolvers = {
       return { success: true };
     },
     setThingInputForm: (_, data, { cache }) => {
-      cache.writeData({ data: { thingInputForm: data.text }});
+      cache.writeData({ data: { thingInputForm: data.text } });
       return { success: true };
     }
   }

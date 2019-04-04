@@ -96,10 +96,9 @@ export default function MePage() {
     });
   }
   function handleCompleteClicked() {
-    console.log('completing!');
     completeThingThisWeek({
-      refetchQueries: ['MyThingThisWeek'],
-    })
+      refetchQueries: ['MyThingThisWeek']
+    });
   }
 
   return (
@@ -109,34 +108,36 @@ export default function MePage() {
         {thingThisWeek ? (
           <>Your One Thing for this week.</>
         ) : (
-            <>What is one thing you want to do this week?</>
-          )}
+          <>What is one thing you want to do this week?</>
+        )}
       </Subtitle>
       <Body>
         {thingThisWeek ? (
           <>
             <Thing thing={thingThisWeek} />
             {!thingThisWeek.complete && (
-              <Button.Primary onClick={handleCompleteClicked}>Complete</Button.Primary>
+              <Button.Primary onClick={handleCompleteClicked}>
+                Complete
+              </Button.Primary>
             )}
           </>
         ) : (
-            <>
-              <div>
-                <textarea
-                  onChange={handleFormChange}
-                  value={thingInput}
-                  data-class-name="thing-input-form"
-                />
-              </div>
-              <Button.Primary
-                disabled={thingInput.length === 0}
-                onClick={handleSubmitClicked}
-              >
-                Submit
+          <>
+            <div>
+              <textarea
+                onChange={handleFormChange}
+                value={thingInput}
+                data-class-name="thing-input-form"
+              />
+            </div>
+            <Button.Primary
+              disabled={thingInput.length === 0}
+              onClick={handleSubmitClicked}
+            >
+              Submit
             </Button.Primary>
-            </>
-          )}
+          </>
+        )}
       </Body>
     </Page>
   );
