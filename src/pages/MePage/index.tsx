@@ -7,6 +7,7 @@ import { useQuery, useMutation } from 'react-apollo-hooks';
 import Subtitle from '../../components/Subtitle';
 import Button from '../../components/Button';
 import { Body } from './MePage.styles';
+import Thing from '../../components/Thing';
 
 const MY_THING_THIS_WEEK = gql`
   query MyThingThisWeek {
@@ -70,10 +71,20 @@ export default function MePage() {
   );
 
   function handleFormChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
-    setThingInputForm({ variables: { text: event.target.value } });
+    setThingInputForm({
+      variables: { text: event.target.value }
+    });
   }
   function handleSubmitClicked() {
-    submitThing();
+    submitThing({
+      update: (cache, mutationResult) => {
+        cache.writeQuery({
+          query: THING_INPUT_FORM,
+          data: { thingInputForm: '' }
+        });
+      },
+      refetchQueries: ['MyThingThisWeek']
+    });
   }
 
   return (
@@ -81,25 +92,36 @@ export default function MePage() {
       <Title>Me</Title>
       <Subtitle>
         {thingThisWeek ? (
-          <>My one thing for this week.</>
+          <>Your One Thing for this week.</>
         ) : (
           <>What is one thing you want to do this week?</>
         )}
       </Subtitle>
       <Body>
-        <div>
-          <textarea
-            onChange={handleFormChange}
-            value={thingInput}
-            data-class-name="thing-input-form"
-          />
-        </div>
-        <Button.Primary
-          disabled={thingInput.length === 0}
-          onClick={handleSubmitClicked}
-        >
-          Submit
-        </Button.Primary>
+        {thingThisWeek ? (
+          <>
+            <Thing thing={thingThisWeek} />
+            {!thingThisWeek.complete && (
+              <Button.Primary>Complete</Button.Primary>
+            )}
+          </>
+        ) : (
+          <>
+            <div>
+              <textarea
+                onChange={handleFormChange}
+                value={thingInput}
+                data-class-name="thing-input-form"
+              />
+            </div>
+            <Button.Primary
+              disabled={thingInput.length === 0}
+              onClick={handleSubmitClicked}
+            >
+              Submit
+            </Button.Primary>
+          </>
+        )}
       </Body>
     </Page>
   );

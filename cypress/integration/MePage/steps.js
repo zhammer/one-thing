@@ -8,13 +8,11 @@ beforeEach(() => {
 });
 
 Given('I havent submitted a thing this week', () => {
-  const me = cy.get('@me');
   cy.mockGraphqlOps({
     operations: {
       MyThingThisWeek: {
         me: {
-          ...me,
-          thing: null
+          thingThisWeek: null
         }
       }
     }
@@ -32,10 +30,36 @@ When('I click on the Thing input form', () => {
 });
 
 When(`I type {string}`, text => {
+  cy.wrap(text).as('inputText');
   cy.get('@thingInputForm').type(text);
 });
 
 When('I click the Submit button', () => {
+  cy.get('@me').then(me => {
+    cy.get('@inputText').then(inputText => {
+      cy.mockGraphqlOps({
+        operations: {
+          SubmitThing: {
+            submitThing: {
+              success: true
+            }
+          },
+          MyThingThisWeek: {
+            me: {
+              thingThisWeek: {
+                id: '1',
+                person: me,
+                description: inputText,
+                complete: false,
+                createdAt: Date.now()
+              }
+            }
+          }
+        }
+      });
+    });
+  });
+
   cy.get('button')
     .contains('Submit')
     .click();
