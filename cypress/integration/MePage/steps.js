@@ -92,8 +92,14 @@ Then('I see my thing', () => {
 
 Then('my thing is not complete', () => {
   cy.get('@thing')
-    .find('svg[data-cass-name=icon-checkmark]')
+    .find('svg[data-class-name=icon-checkmark]')
     .should('not.exist');
+});
+
+Then('my thing is complete', () => {
+  cy.get('@thing')
+    .find('svg[data-class-name=icon-checkmark]')
+    .should('exist');
 });
 
 Then(`I see a button that says {string}`, text => {
