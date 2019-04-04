@@ -38,7 +38,7 @@ Feature: Me Page
       | description                                                       | complete |
       | Finish the Voice Of The Customer video for next week's team lunch | false    |
     When I visit the Me page
-    And I click the button that says "Complete"
+    And I click the Complete button
     Then I see my thing
     And my thing is complete
 

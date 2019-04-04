@@ -22,6 +22,14 @@ Given('I havent submitted a thing this week', () => {
 Given(`I have submitted the following thing this week:`, dataTable => {
   const thing = pluckThing(dataTable);
   cy.get('@me').then(me => {
+    const thingThisWeek = {
+      id: '1',
+      person: me,
+      description: thing.description,
+      complete: thing.complete,
+      createdAt: Date.now()
+    }
+    cy.wrap(thingThisWeek).as('thingThisWeek');
     cy.mockGraphqlOps({
       operations: {
         MyThingThisWeek: {
@@ -84,6 +92,32 @@ When('I click the Submit button', () => {
   cy.get('button')
     .contains('Submit')
     .click();
+});
+
+When('I click the Complete button', () => {
+  // We get the button first here to make sure that the button exists (the initial graphql query has been run
+  // and the page has rendered) before we change the graphql mocks again.
+  cy.get('button').contains('Complete').as('completeButton');
+  cy.get('@thingThisWeek').then(thingThisWeek => {
+    cy.mockGraphqlOps({
+      operations: {
+        CompleteThingThisWeek: {
+          completeThingThisWeek: {
+            success: true
+          }
+        },
+        MyThingThisWeek: {
+          me: {
+            thingThisWeek: {
+              ...thingThisWeek,
+              complete: true,
+            }
+          }
+        }
+      }
+    });
+  });
+  cy.get('@completeButton').click()
 });
 
 Then('I see my thing', () => {
