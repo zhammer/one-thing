@@ -50,6 +50,14 @@ const SUBMIT_THING = gql`
   }
 `;
 
+const COMPLETE_THING_THIS_WEEK = gql`
+  mutation CompleteThingThisWeek {
+    completeThingThisWeek {
+      success
+    }
+  }
+`;
+
 interface Data {
   me: {
     thingThisWeek: ThingInterface | null;
@@ -63,6 +71,7 @@ export default function MePage() {
   }>(THING_INPUT_FORM);
   const setThingInputForm = useMutation(SET_THING_INPUT_FORM);
   const submitThing = useMutation(SUBMIT_THING);
+  const completeThingThisWeek = useMutation(COMPLETE_THING_THIS_WEEK);
   const thingThisWeek = useMemo(() => pluckThingThisWeek(data), [data]);
   const thingInput = useMemo(
     () =>
@@ -86,6 +95,12 @@ export default function MePage() {
       refetchQueries: ['MyThingThisWeek']
     });
   }
+  function handleCompleteClicked() {
+    console.log('completing!');
+    completeThingThisWeek({
+      refetchQueries: ['MyThingThisWeek'],
+    })
+  }
 
   return (
     <Page>
@@ -94,34 +109,34 @@ export default function MePage() {
         {thingThisWeek ? (
           <>Your One Thing for this week.</>
         ) : (
-          <>What is one thing you want to do this week?</>
-        )}
+            <>What is one thing you want to do this week?</>
+          )}
       </Subtitle>
       <Body>
         {thingThisWeek ? (
           <>
             <Thing thing={thingThisWeek} />
             {!thingThisWeek.complete && (
-              <Button.Primary>Complete</Button.Primary>
+              <Button.Primary onClick={handleCompleteClicked}>Complete</Button.Primary>
             )}
           </>
         ) : (
-          <>
-            <div>
-              <textarea
-                onChange={handleFormChange}
-                value={thingInput}
-                data-class-name="thing-input-form"
-              />
-            </div>
-            <Button.Primary
-              disabled={thingInput.length === 0}
-              onClick={handleSubmitClicked}
-            >
-              Submit
+            <>
+              <div>
+                <textarea
+                  onChange={handleFormChange}
+                  value={thingInput}
+                  data-class-name="thing-input-form"
+                />
+              </div>
+              <Button.Primary
+                disabled={thingInput.length === 0}
+                onClick={handleSubmitClicked}
+              >
+                Submit
             </Button.Primary>
-          </>
-        )}
+            </>
+          )}
       </Body>
     </Page>
   );
