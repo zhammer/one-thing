@@ -19,6 +19,27 @@ Given('I havent submitted a thing this week', () => {
   });
 });
 
+Given(`I have submitted the following thing this week:`, dataTable => {
+  const thing = pluckThing(dataTable);
+  cy.get('@me').then(me => {
+    cy.mockGraphqlOps({
+      operations: {
+        MyThingThisWeek: {
+          me: {
+            thingThisWeek: {
+              id: '1',
+              person: me,
+              description: thing.description,
+              complete: thing.complete,
+              createdAt: Date.now()
+            }
+          }
+        }
+      }
+    });
+  });
+});
+
 When('I visit the Me page', () => {
   cy.visit('/me');
 });
@@ -78,3 +99,11 @@ Then('my thing is not complete', () => {
 Then(`I see a button that says {string}`, text => {
   cy.get('button').contains(text);
 });
+
+function pluckThing(dataTable) {
+  const rawThing = dataTable.hashes()[0];
+  return {
+    description: rawThing.description,
+    complete: rawThing.complete === 'true'
+  };
+}
