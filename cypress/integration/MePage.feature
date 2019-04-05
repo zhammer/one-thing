@@ -13,6 +13,14 @@ Feature: Me Page
     When I visit the Me page
     Then I see the title "Me"
     And I see the subtitle "What is one thing you want to do this week?"
+    Then I see the thing input form
+    And the thing input form has one of the following placeholders
+      | placeholder                                    |
+      | Increase GTV by 300%                           |
+      | Fix the ice machine.                           |
+      | Organize a salsa night for seatgeek-en-español |
+      | Pick a date for the next womens ERG happy hour |
+    And I see a button that says "Submit"
 
   Scenario: I submit a Thing
     Given I havent submitted a thing this week
@@ -50,15 +58,3 @@ Feature: Me Page
     When I visit the Me page
     Then I see my thing
     And my thing is complete
-
-  Scenario: Thing input form placeholder
-    Given I havent submitted a thing this week
-    When I visit the Me page
-    Then I see the thing input form
-    And the thing input form has one of the following placeholders
-      | placeholder                                    |
-      | Increase GTV by 300%                           |
-      | Fix the ice machine.                           |
-      | Organize a salsa night for seatgeek-en-español |
-      | Pick a date for the next womens ERG happy hour |
-
