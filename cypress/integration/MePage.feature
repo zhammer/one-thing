@@ -32,6 +32,7 @@ Feature: Me Page
     When I visit the Me page
     Then I see my thing
     And my thing is not complete
+    And I see a button that says "Complete"
 
   Scenario: I mark this week's Thing as complete
     Given I have submitted the following thing this week:
