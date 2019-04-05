@@ -9,6 +9,7 @@ import Button from '../../components/Button';
 import { Body, ThingTextArea } from './MePage.styles';
 import Thing from '../../components/Thing';
 import useFocusOnMount from '../../hooks/useFocusOnMount';
+import { getRandomItem } from '../../util';
 
 const MY_THING_THIS_WEEK = gql`
   query MyThingThisWeek {
@@ -127,6 +128,7 @@ export default function MePage() {
           <>
             <ThingTextArea
               {...focusProps}
+              placeholder={placeholder}
               onChange={handleFormChange}
               value={thingInput}
               data-class-name="thing-input-form"
@@ -143,6 +145,14 @@ export default function MePage() {
     </Page>
   );
 }
+
+const placeholderOptions = [
+  'Increase GTV by 300%',
+  'Fix the ice machine.',
+  'Organize a salsa night for seatgeek-en-español',
+  'Pick a date for the next womens ERG happy hour'
+]
+const placeholder = getRandomItem(placeholderOptions);
 
 function pluckThingThisWeek(data: Data | undefined): ThingInterface | null {
   if (!data || !data.me) {
