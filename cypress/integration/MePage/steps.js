@@ -147,3 +147,21 @@ function pluckThing(dataTable) {
     complete: rawThing.complete === 'true'
   };
 }
+
+Then('I see the thing input form', () => {
+  cy.get('textarea[data-class-name=thing-input-form')
+    .as('thingInputForm')
+    .should('be.visible')
+})
+
+Then('the thing input form has one of the following placeholders', rawTable => {
+  const expectedPlaceholders = pluckPlaceholders(rawTable);
+  cy.get('@thingInputForm')
+    .then(thingInputForm => {
+      expect(expectedPlaceholders).to.contain(thingInputForm.attr('placeholder'));
+    });
+})
+
+function pluckPlaceholders(dataTable) {
+  return dataTable.hashes().map(row => row.placeholder)
+}
