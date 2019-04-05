@@ -107,14 +107,16 @@ export default function MePage() {
   return (
     <Page>
       <Title>Me</Title>
-      {loading ? 'Loading...' : (
+      {loading ? (
+        'Loading...'
+      ) : (
         <>
           <Subtitle>
             {thingThisWeek ? (
               <>Your One Thing for this week.</>
             ) : (
-                <>What is one thing you want to do this week?</>
-              )}
+              <>What is one thing you want to do this week?</>
+            )}
           </Subtitle>
           <Body>
             {thingThisWeek ? (
@@ -123,26 +125,26 @@ export default function MePage() {
                 {!thingThisWeek.complete && (
                   <Button.Primary onClick={handleCompleteClicked}>
                     Complete
-              </Button.Primary>
+                  </Button.Primary>
                 )}
               </>
             ) : (
-                <>
-                  <ThingTextArea
-                    {...focusProps}
-                    placeholder={placeholder}
-                    onChange={handleFormChange}
-                    value={thingInput}
-                    data-class-name="thing-input-form"
-                  />
-                  <Button.Primary
-                    disabled={thingInput.length === 0}
-                    onClick={handleSubmitClicked}
-                  >
-                    Submit
-            </Button.Primary>
-                </>
-              )}
+              <>
+                <ThingTextArea
+                  {...focusProps}
+                  placeholder={placeholder}
+                  onChange={handleFormChange}
+                  value={thingInput}
+                  data-class-name="thing-input-form"
+                />
+                <Button.Primary
+                  disabled={thingInput.length === 0}
+                  onClick={handleSubmitClicked}
+                >
+                  Submit
+                </Button.Primary>
+              </>
+            )}
           </Body>
         </>
       )}
@@ -155,7 +157,7 @@ const placeholderOptions = [
   'Fix the ice machine.',
   'Organize a salsa night for seatgeek-en-español',
   'Pick a date for the next womens ERG happy hour'
-]
+];
 const placeholder = getRandomItem(placeholderOptions);
 
 function pluckThingThisWeek(data: Data | undefined): ThingInterface | null {

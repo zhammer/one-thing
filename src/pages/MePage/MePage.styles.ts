@@ -7,10 +7,10 @@ export const Body = styled.div`
   flex-direction: column;
 
   & > * + * {
-    margin-top: .75em;
+    margin-top: 0.75em;
   }
 `;
 
 export const ThingTextArea = styled(TextArea)`
   width: 80%;
-`
+`;

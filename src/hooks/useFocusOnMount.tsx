@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 type FocusProps = {
   autoFocus: boolean;
   onBlur: () => void;
   onFocus: () => void;
-}
+};
 
 /**
  * Hook that provides props to focus an element on mount.
@@ -26,5 +26,5 @@ export default function useFocusOnMount(): FocusProps {
     autoFocus: focused,
     onBlur,
     onFocus
-  }
+  };
 }
