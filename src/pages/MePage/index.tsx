@@ -6,7 +6,7 @@ import { ThingInterface } from '../../types';
 import { useQuery, useMutation } from 'react-apollo-hooks';
 import Subtitle from '../../components/Subtitle';
 import Button from '../../components/Button';
-import { Body } from './MePage.styles';
+import { Body, ThingTextArea } from './MePage.styles';
 import Thing from '../../components/Thing';
 
 const MY_THING_THIS_WEEK = gql`
@@ -123,13 +123,11 @@ export default function MePage() {
           </>
         ) : (
           <>
-            <div>
-              <textarea
-                onChange={handleFormChange}
-                value={thingInput}
-                data-class-name="thing-input-form"
-              />
-            </div>
+            <ThingTextArea
+              onChange={handleFormChange}
+              value={thingInput}
+              data-class-name="thing-input-form"
+            />
             <Button.Primary
               disabled={thingInput.length === 0}
               onClick={handleSubmitClicked}
