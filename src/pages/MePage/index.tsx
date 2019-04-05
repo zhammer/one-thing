@@ -107,41 +107,45 @@ export default function MePage() {
   return (
     <Page>
       <Title>Me</Title>
-      <Subtitle>
-        {thingThisWeek ? (
-          <>Your One Thing for this week.</>
-        ) : (
-          <>What is one thing you want to do this week?</>
-        )}
-      </Subtitle>
-      <Body>
-        {thingThisWeek ? (
-          <>
-            <Thing thing={thingThisWeek} />
-            {!thingThisWeek.complete && (
-              <Button.Primary onClick={handleCompleteClicked}>
-                Complete
+      {loading ? 'Loading...' : (
+        <>
+          <Subtitle>
+            {thingThisWeek ? (
+              <>Your One Thing for this week.</>
+            ) : (
+                <>What is one thing you want to do this week?</>
+              )}
+          </Subtitle>
+          <Body>
+            {thingThisWeek ? (
+              <>
+                <Thing thing={thingThisWeek} />
+                {!thingThisWeek.complete && (
+                  <Button.Primary onClick={handleCompleteClicked}>
+                    Complete
               </Button.Primary>
-            )}
-          </>
-        ) : (
-          <>
-            <ThingTextArea
-              {...focusProps}
-              placeholder={placeholder}
-              onChange={handleFormChange}
-              value={thingInput}
-              data-class-name="thing-input-form"
-            />
-            <Button.Primary
-              disabled={thingInput.length === 0}
-              onClick={handleSubmitClicked}
-            >
-              Submit
+                )}
+              </>
+            ) : (
+                <>
+                  <ThingTextArea
+                    {...focusProps}
+                    placeholder={placeholder}
+                    onChange={handleFormChange}
+                    value={thingInput}
+                    data-class-name="thing-input-form"
+                  />
+                  <Button.Primary
+                    disabled={thingInput.length === 0}
+                    onClick={handleSubmitClicked}
+                  >
+                    Submit
             </Button.Primary>
-          </>
-        )}
-      </Body>
+                </>
+              )}
+          </Body>
+        </>
+      )}
     </Page>
   );
 }
