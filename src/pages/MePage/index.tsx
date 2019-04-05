@@ -8,6 +8,7 @@ import Subtitle from '../../components/Subtitle';
 import Button from '../../components/Button';
 import { Body, ThingTextArea } from './MePage.styles';
 import Thing from '../../components/Thing';
+import useFocusOnMount from '../../hooks/useFocusOnMount';
 
 const MY_THING_THIS_WEEK = gql`
   query MyThingThisWeek {
@@ -78,6 +79,7 @@ export default function MePage() {
       thingInputFormQueryData ? thingInputFormQueryData.thingInputForm : '',
     [thingInputFormQueryData]
   );
+  const focusProps = useFocusOnMount();
 
   function handleFormChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setThingInputForm({
@@ -124,6 +126,7 @@ export default function MePage() {
         ) : (
           <>
             <ThingTextArea
+              {...focusProps}
               onChange={handleFormChange}
               value={thingInput}
               data-class-name="thing-input-form"
