@@ -28,7 +28,7 @@ Given(`I have submitted the following thing this week:`, dataTable => {
       description: thing.description,
       complete: thing.complete,
       createdAt: Date.now()
-    }
+    };
     cy.wrap(thingThisWeek).as('thingThisWeek');
     cy.mockGraphqlOps({
       operations: {
@@ -97,7 +97,9 @@ When('I click the Submit button', () => {
 When('I click the Complete button', () => {
   // We get the button first here to make sure that the button exists (the initial graphql query has been run
   // and the page has rendered) before we change the graphql mocks again.
-  cy.get('button').contains('Complete').as('completeButton');
+  cy.get('button')
+    .contains('Complete')
+    .as('completeButton');
   cy.get('@thingThisWeek').then(thingThisWeek => {
     cy.mockGraphqlOps({
       operations: {
@@ -110,14 +112,14 @@ When('I click the Complete button', () => {
           me: {
             thingThisWeek: {
               ...thingThisWeek,
-              complete: true,
+              complete: true
             }
           }
         }
       }
     });
   });
-  cy.get('@completeButton').click()
+  cy.get('@completeButton').click();
 });
 
 Then('I see my thing', () => {
@@ -137,7 +139,13 @@ Then('my thing is complete', () => {
 });
 
 Then(`I see a button that says {string}`, text => {
-  cy.get('button').contains(text);
+  cy.get('button')
+    .contains(text)
+    .as('lastSeenButton');
+});
+
+Then('the button is disabled', () => {
+  cy.get('@lastSeenButton').should('be.disabled');
 });
 
 function pluckThing(dataTable) {
@@ -151,17 +159,16 @@ function pluckThing(dataTable) {
 Then('I see the thing input form', () => {
   cy.get('textarea[data-class-name=thing-input-form')
     .as('thingInputForm')
-    .should('be.visible')
-})
+    .should('be.visible');
+});
 
 Then('the thing input form has one of the following placeholders', rawTable => {
   const expectedPlaceholders = pluckPlaceholders(rawTable);
-  cy.get('@thingInputForm')
-    .then(thingInputForm => {
-      expect(expectedPlaceholders).to.contain(thingInputForm.attr('placeholder'));
-    });
-})
+  cy.get('@thingInputForm').then(thingInputForm => {
+    expect(expectedPlaceholders).to.contain(thingInputForm.attr('placeholder'));
+  });
+});
 
 function pluckPlaceholders(dataTable) {
-  return dataTable.hashes().map(row => row.placeholder)
+  return dataTable.hashes().map(row => row.placeholder);
 }

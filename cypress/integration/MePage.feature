@@ -21,6 +21,7 @@ Feature: Me Page
       | Organize a salsa night for seatgeek-en-español |
       | Pick a date for the next womens ERG happy hour |
     And I see a button that says "Submit"
+    And the button is disabled
 
   Scenario: I submit a Thing
     Given I havent submitted a thing this week
