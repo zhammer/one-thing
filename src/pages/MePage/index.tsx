@@ -29,6 +29,12 @@ const MY_THING_THIS_WEEK = gql`
   }
 `;
 
+interface MyThingThisWeekQueryData {
+  me: {
+    thingThisWeek: ThingInterface | null;
+  };
+}
+
 const SET_THING_INPUT_FORM = gql`
   mutation SetThingInputForm($text: String!) {
     setThingInputForm(text: $text) @client {
@@ -60,21 +66,20 @@ const COMPLETE_THING_THIS_WEEK = gql`
   }
 `;
 
-interface Data {
-  me: {
-    thingThisWeek: ThingInterface | null;
-  };
-}
-
 export default function MePage() {
-  const { data, error, loading } = useQuery<Data>(MY_THING_THIS_WEEK);
+  const { data: myThingThisWeekQueryData, error, loading } = useQuery<
+    MyThingThisWeekQueryData
+  >(MY_THING_THIS_WEEK);
   const { data: thingInputFormQueryData } = useQuery<{
     thingInputForm: string;
   }>(THING_INPUT_FORM);
   const setThingInputForm = useMutation(SET_THING_INPUT_FORM);
   const submitThing = useMutation(SUBMIT_THING);
   const completeThingThisWeek = useMutation(COMPLETE_THING_THIS_WEEK);
-  const thingThisWeek = useMemo(() => pluckThingThisWeek(data), [data]);
+  const thingThisWeek = useMemo(
+    () => pluckThingThisWeek(myThingThisWeekQueryData),
+    [myThingThisWeekQueryData]
+  );
   const thingInput = useMemo(
     () =>
       thingInputFormQueryData ? thingInputFormQueryData.thingInputForm : '',
@@ -160,7 +165,9 @@ const placeholderOptions = [
 ];
 const placeholder = getRandomItem(placeholderOptions);
 
-function pluckThingThisWeek(data: Data | undefined): ThingInterface | null {
+function pluckThingThisWeek(
+  data: MyThingThisWeekQueryData | undefined
+): ThingInterface | null {
   if (!data || !data.me) {
     return null;
   }
