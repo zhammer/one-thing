@@ -13,7 +13,7 @@ Feature: Me Page
     When I visit the Me page
     Then I see the title "Me"
     And I see the subtitle "What is one thing you want to do this week?"
-    Then I see the thing input form
+    And I see the thing input form
     And the thing input form has one of the following placeholders
       | placeholder                                    |
       | Increase GTV by 300%                           |
