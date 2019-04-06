@@ -13,6 +13,10 @@ const Base = styled.button`
   &:hover {
     box-shadow: 0 12px 22px rgba(0, 0, 0, 0.2);
   }
+
+  &:disabled {
+    background: ${props => props.theme.secondaryLight};
+  }
 `;
 
 const Primary = styled(Base)`
