@@ -1,7 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 import { Thing, Person, DatabaseGateway, QueryOptions } from "../types";
 
-export class TypeOrmDatabaseGateway implements DatabaseGateway {
+export class InMemoryDatabaseGateway implements DatabaseGateway {
   private counter: number = 1;
   things: Thing[] = [
     {
@@ -68,36 +67,3 @@ export class TypeOrmDatabaseGateway implements DatabaseGateway {
     return person || null;
   }
 }
-
-/* @Entity()
-class ThingModel implements Thing {
-  @PrimaryGeneratedColumn()
-  id: string;
-
-  @Column()
-  personId: string;
-
-  @Column()
-  description: string;
-
-  @Column()
-  complete: boolean;
-
-  @Column()
-  createdAt: Date;
-}
-
-@Entity()
-class PersonModel implements Person {
-  @PrimaryGeneratedColumn()
-  id: string;
-
-  @Column()
-  firstName: string;
-
-  @Column()
-  lastName: string;
-
-  @Column()
-  email: string;
-} */

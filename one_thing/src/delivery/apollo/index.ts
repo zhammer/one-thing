@@ -8,7 +8,7 @@ import {
   submitThing,
   completePersonsThingThisWeek
 } from "../../useThings";
-import { TypeOrmDatabaseGateway } from "../../gateways/databaseGateway";
+import { InMemoryDatabaseGateway } from "../../gateways/inMemoryDatabaseGateway";
 
 interface Context {
   gateways: Gateways;
@@ -111,7 +111,7 @@ const resolvers = {
 
 export function makeApolloServer() {
   const gateways: Gateways = {
-    databaseGateway: new TypeOrmDatabaseGateway()
+    databaseGateway: new InMemoryDatabaseGateway()
   };
   return new ApolloServer({
     typeDefs,
