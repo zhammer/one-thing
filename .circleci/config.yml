@@ -2,20 +2,24 @@ version: 2.1
 
 jobs:
   lint-client:
-    executor: node-executor
+    executor: client-node-executor
     steps:
       - checkout
-      - install-node-dependencies
-      - run: yarn run prettylint "src/**/*.[jt]s?(x)"
+      - install-client-node-dependencies
+      - run:
+          command: yarn run prettylint "src/**/*.[jt]s?(x)"
+          working_directory: ~/project/web_client
 
   build-client:
-    executor: node-executor
+    executor: client-node-executor
     steps:
       - checkout
-      - install-node-dependencies
-      - run: yarn build
+      - install-client-node-dependencies
+      - run:
+          command: yarn build
+          working_directory: ~/project/web_client
       - persist_to_workspace:
-          root: ~/project
+          root: ~/project/web_client
           paths:
             - build
 
@@ -23,11 +27,12 @@ jobs:
     executor: cypress-executor
     steps:
       - checkout
-      - install-node-dependencies
+      - install-client-node-dependencies
       - attach_workspace:
-          at: ~/project
+          at: ~/project/web_client
       - run:
           name: Run server
+          working_directory: ~/project/web_client
           command: yarn run serve -s build
           background: true
       - run:
@@ -35,10 +40,11 @@ jobs:
           command: >-
             yarn run cypress run --reporter junit
             --reporter-options "mochaFile=test-results/cypress/results.[hash].xml"
+          working_directory: ~/project/web_client
       - store_test_results:
-          path: test-results
+          path: ~/project/web_client/test-results
       - store_artifacts:
-          path: cypress/videos
+          path: ~/project/web_client/cypress/videos
 
 workflows:
   build:
@@ -50,7 +56,7 @@ workflows:
             - build-client
 
 executors:
-  node-executor:
+  client-node-executor:
     docker:
       - image: circleci/node:10
     working_directory: ~/project
@@ -60,12 +66,14 @@ executors:
     working_directory: ~/project
 
 commands:
-  install-node-dependencies:
+  install-client-node-dependencies:
     steps:
       - restore_cache:
           keys:
-            - node-cache-{{ checksum "yarn.lock" }}
-      - run: yarn install
+            - node-cache-{{ checksum "~/project/web_client/yarn.lock" }}
+      - run:
+          command: yarn install
+          working_directory: ~/project/web_client
       - save_cache:
-          key: node-cache-{{ checksum "yarn.lock" }}
+          key: node-cache-{{ checksum "~/project/web_client/yarn.lock" }}
           paths: node_modules
