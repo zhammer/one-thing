@@ -1,0 +1,103 @@
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Thing, Person, DatabaseGateway, QueryOptions } from "../types";
+
+export class TypeOrmDatabaseGateway implements DatabaseGateway {
+  private counter: number = 0;
+  things: Thing[] = [
+    {
+      id: "1",
+      personId: "2",
+      description: "Hang out with Zach!",
+      complete: true,
+      createdAt: new Date()
+    }
+  ];
+  persons: Person[] = [
+    {
+      id: "1",
+      firstName: "Zach",
+      lastName: "Hammer",
+      email: "zhammer@seatgeek.com"
+    },
+    {
+      id: "2",
+      firstName: "Chris",
+      lastName: "Gray",
+      email: "cgray@seatgeek.com"
+    }
+  ];
+
+  async fetchThings(options?: QueryOptions): Promise<Thing[]> {
+    return this.things;
+  }
+
+  async fetchThingsOfPerson(
+    personId: string,
+    options?: QueryOptions
+  ): Promise<Thing[]> {
+    return this.things.filter(thing => thing.personId === personId);
+  }
+
+  async addThing(personId: string, description: string): Promise<Thing> {
+    const id = ++this.counter;
+    const thing: Thing = {
+      id: id.toString(),
+      personId,
+      description,
+      complete: false,
+      createdAt: new Date()
+    };
+    this.things = [...this.things, thing];
+    return thing;
+  }
+
+  async setThingComplete(thingId: string): Promise<Thing> {
+    this.things = this.things.map(thing => ({
+      ...thing,
+      complete: thing.id === thingId ? true : thing.complete
+    }));
+    const thing = this.things.find(thing => thing.id === thingId);
+    if (!thing) {
+      throw new Error("oops");
+    }
+    return thing;
+  }
+
+  async fetchPerson(personId: string): Promise<Person | null> {
+    const person = this.persons.find(person => person.id === personId);
+    return person || null;
+  }
+}
+
+/* @Entity()
+class ThingModel implements Thing {
+  @PrimaryGeneratedColumn()
+  id: string;
+
+  @Column()
+  personId: string;
+
+  @Column()
+  description: string;
+
+  @Column()
+  complete: boolean;
+
+  @Column()
+  createdAt: Date;
+}
+
+@Entity()
+class PersonModel implements Person {
+  @PrimaryGeneratedColumn()
+  id: string;
+
+  @Column()
+  firstName: string;
+
+  @Column()
+  lastName: string;
+
+  @Column()
+  email: string;
+} */
