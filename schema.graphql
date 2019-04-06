@@ -48,3 +48,8 @@ type Query {
   seatGeekThingsThisWeek: ThingConnection!
   me: Person!
 }
+
+type Mutation {
+  submitThing(description: String!): MutationResult!
+  completeThingThisWeek: MutationResult!
+}

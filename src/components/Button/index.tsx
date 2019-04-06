@@ -8,10 +8,14 @@ const Base = styled.button`
   font-size: 1.25rem;
   padding: 0.5em 2em;
   border-radius: 0.25em;
-  cursor: pointer;
 
-  &:hover {
+  &:hover:not([disabled]) {
     box-shadow: 0 12px 22px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+
+  &:disabled {
+    background: ${props => props.theme.secondaryLight};
   }
 `;
 
