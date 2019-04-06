@@ -1,5 +1,6 @@
 import styled from '../../custom/styled-components';
 import TextArea from '../../components/TextArea';
+import { mobileBreakpoint } from '../../styles/variables';
 
 export const Body = styled.div`
   display: flex;
@@ -12,5 +13,10 @@ export const Body = styled.div`
 `;
 
 export const ThingTextArea = styled(TextArea)`
+  font-size: 1rem;
   width: 80%;
+
+  @media screen and (min-width: ${mobileBreakpoint}) {
+    font-size: 1.25rem;
+  }
 `;
