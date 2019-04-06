@@ -59,3 +59,9 @@ Feature: Me Page
     When I visit the Me page
     Then I see my thing
     And my thing is complete
+
+  Scenario: There is an error fetching my Thing this week
+    Given there is a problem with the server
+    When I visit the Me page
+    Then I see the title "Me"
+    And I see the subtitle "There was an error."

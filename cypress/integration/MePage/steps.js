@@ -48,6 +48,16 @@ Given(`I have submitted the following thing this week:`, dataTable => {
   });
 });
 
+Given('there is a problem with the server', () => {
+  cy.mockGraphqlOps({
+    operations: {
+      MyThingThisWeek: {
+        errors: ['Internal error.']
+      }
+    }
+  });
+});
+
 When('I visit the Me page', () => {
   cy.visit('/me');
 });
