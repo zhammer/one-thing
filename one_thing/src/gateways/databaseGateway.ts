@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 import { Thing, Person, DatabaseGateway, QueryOptions } from "../types";
 
 export class TypeOrmDatabaseGateway implements DatabaseGateway {
-  private counter: number = 0;
+  private counter: number = 1;
   things: Thing[] = [
     {
       id: "1",

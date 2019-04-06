@@ -17,14 +17,38 @@ interface Context {
   };
 }
 
+type Edge<T, CursorType = string> = {
+  cursor: CursorType;
+  node: T;
+};
+
+type RelayConnection<T, CursorType = string> = {
+  edges: Edge<T, CursorType>[];
+  pageInfo: {
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+  };
+};
+
 const resolvers = {
   Query: {
     async seatGeekThingsThisWeek(
       _: any,
       __: any,
       { gateways }: Context
-    ): Promise<Thing[]> {
-      return await getAllThingsThisWeek(gateways);
+    ): Promise<RelayConnection<Thing>> {
+      const things = await getAllThingsThisWeek(gateways);
+      console.log(things);
+      return {
+        edges: things.map(thing => ({
+          cursor: thing.id,
+          node: thing
+        })),
+        pageInfo: {
+          hasNextPage: false,
+          hasPreviousPage: false
+        }
+      };
     },
     async me(_: any, __: any, context: Context): Promise<Person> {
       const person = await getPerson(context.gateways, context.authInfo.userId);
@@ -76,7 +100,7 @@ const resolvers = {
   },
   Thing: {
     async person(thing: Thing, _: any, { gateways }: Context): Promise<Person> {
-      const person = await getPerson(gateways, thing.id);
+      const person = await getPerson(gateways, thing.personId);
       if (!person) {
         throw new Error(`Couldnt find person for thing ${thing}`);
       }
@@ -92,6 +116,14 @@ export function makeApolloServer() {
   return new ApolloServer({
     typeDefs,
     resolvers,
+    formatError: error => {
+      console.log(error);
+      return error;
+    },
+    formatResponse: (response: any) => {
+      console.log(response);
+      return response;
+    },
     context: async ({ req }): Promise<Context> => {
       return {
         gateways,
