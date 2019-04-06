@@ -6,7 +6,7 @@ import { ThingInterface } from '../../types';
 import { useQuery, useMutation } from 'react-apollo-hooks';
 import Subtitle from '../../components/Subtitle';
 import Button from '../../components/Button';
-import { Body, ThingTextArea } from './MePage.styles';
+import { Body, ThingTextArea, Danger } from './MePage.styles';
 import Thing from '../../components/Thing';
 import useFocusOnMount from '../../hooks/useFocusOnMount';
 import { getRandomItem } from '../../util';
@@ -114,6 +114,10 @@ export default function MePage() {
       <Title>Me</Title>
       {loading ? (
         'Loading...'
+      ) : error ? (
+        <Subtitle>
+          <Danger>There was an error.</Danger>
+        </Subtitle>
       ) : (
         <>
           <Subtitle>

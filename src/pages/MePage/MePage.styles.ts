@@ -20,3 +20,8 @@ export const ThingTextArea = styled(TextArea)`
     font-size: 1.25rem;
   }
 `;
+
+export const Danger = styled.span`
+  font-weight: bold;
+  color: ${props => props.theme.danger};
+`;
