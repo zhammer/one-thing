@@ -38,7 +38,6 @@ const resolvers = {
       { gateways }: Context
     ): Promise<RelayConnection<Thing>> {
       const things = await getAllThingsThisWeek(gateways);
-      console.log(things);
       return {
         edges: things.map(thing => ({
           cursor: thing.id,
@@ -95,6 +94,7 @@ const resolvers = {
       _: any,
       { gateways }: Context
     ): Promise<Thing | null> {
+      console.log(person);
       return await getPersonsThingThisWeek(gateways, person.id);
     }
   },
@@ -124,6 +124,7 @@ export function makeApolloServer() {
       console.log(response);
       return response;
     },
+    playground: true,
     context: async ({ req }): Promise<Context> => {
       return {
         gateways,
@@ -131,7 +132,6 @@ export function makeApolloServer() {
           userId: "1"
         }
       };
-    },
-    playground: true
+    }
   });
 }

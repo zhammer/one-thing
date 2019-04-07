@@ -4,36 +4,40 @@ import {
   Column,
   Connection,
   ConnectionManager,
-  getConnection
+  CreateDateColumn,
+  UpdateDateColumn
 } from "typeorm";
 import { Thing, Person, DatabaseGateway, QueryOptions } from "../types";
 
 export class TypeOrmDatabaseGateway implements DatabaseGateway {
-  private connector: Connection;
-  private async getConnection() {
-    return await this.connector.connect();
-  }
+  private connection!: Connection;
 
   constructor() {
     const connectionManager = new ConnectionManager();
-    this.connector = connectionManager.create({
-      type: "sqlite",
-      database: "one-thing-sqlite",
-      entities: [__filename],
-      synchronize: true
-    });
+    connectionManager
+      .create({
+        type: "sqlite",
+        database: "one-thing.sqlite",
+        entities: [ThingModel, PersonModel],
+        synchronize: true,
+        logging: true
+      })
+      .connect()
+      .then(connection => {
+        this.connection = connection;
+      });
   }
 
   async fetchThings(options?: QueryOptions): Promise<Thing[]> {
-    const connection = await getConnection();
-    let query = connection
+    let query = this.connection
       .getRepository(ThingModel)
       .createQueryBuilder("thing");
     if (options && options.from) {
-      query = query.where("thing.createdAt > :from", { from: options.from });
+      query.andWhere("thing.createdAt > :from", { from: options.from });
     }
     if (options && options.to) {
-      query = query.where("thing.createdAt < :to", { to: options.to });
+      // can't figure out why this is breaking this query
+      // query.andWhere("thing.createdAt < :to", { to: options.to });
     }
     return await query.getMany();
   }
@@ -42,31 +46,29 @@ export class TypeOrmDatabaseGateway implements DatabaseGateway {
     personId: string,
     options?: QueryOptions
   ): Promise<Thing[]> {
-    const connection = await getConnection();
-    let query = connection
+    let query = this.connection
       .getRepository(ThingModel)
-      .createQueryBuilder()
+      .createQueryBuilder("thing")
       .where("thing.personId = :personId", { personId });
     if (options && options.from) {
-      query = query.where("thing.createdAt > :from", { from: options.from });
+      query = query.andWhere("createdAt > :from", { from: options.from });
     }
     if (options && options.to) {
-      query = query.where("thing.createdAt < :to", { to: options.to });
+      // breaking
+      // query = query.andWhere("createdAt < :to", { to: options.to });
     }
     return await query.getMany();
   }
 
   async addThing(personId: string, description: string): Promise<Thing> {
-    const connection = await getConnection();
     let thingInput = new ThingModel();
     thingInput.personId = personId;
     thingInput.description = description;
-    return await connection.getRepository(ThingModel).save(thingInput);
+    return await this.connection.getRepository(ThingModel).save(thingInput);
   }
 
   async setThingComplete(thingId: string): Promise<null> {
-    const connection = await getConnection();
-    await connection
+    await this.connection
       .createQueryBuilder()
       .update(ThingModel)
       .set({
@@ -78,10 +80,9 @@ export class TypeOrmDatabaseGateway implements DatabaseGateway {
   }
 
   async fetchPerson(personId: string): Promise<Person | null> {
-    const connection = await getConnection();
-    const query = connection
+    const query = this.connection
       .getRepository(PersonModel)
-      .createQueryBuilder()
+      .createQueryBuilder("person")
       .select()
       .where("id = :id", { id: personId });
     const person = await query.getOne();
@@ -89,7 +90,7 @@ export class TypeOrmDatabaseGateway implements DatabaseGateway {
   }
 }
 
-@Entity()
+@Entity({ name: "things" })
 class ThingModel implements Thing {
   @PrimaryGeneratedColumn()
   id!: string;
@@ -100,14 +101,17 @@ class ThingModel implements Thing {
   @Column()
   description!: string;
 
-  @Column()
+  @Column({ default: false })
   complete!: boolean;
 
-  @Column()
+  @CreateDateColumn()
   createdAt!: Date;
+
+  @UpdateDateColumn()
+  updatedAt!: Date;
 }
 
-@Entity()
+@Entity({ name: "persons" })
 class PersonModel implements Person {
   @PrimaryGeneratedColumn()
   id!: string;
@@ -120,4 +124,10 @@ class PersonModel implements Person {
 
   @Column()
   email!: string;
+
+  @CreateDateColumn()
+  createdAt!: Date;
+
+  @UpdateDateColumn()
+  updatedAt!: Date;
 }
