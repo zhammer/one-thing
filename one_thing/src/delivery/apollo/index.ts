@@ -46,11 +46,17 @@ async function getAuth0UserId(request: Request): Promise<string> {
     throw new AuthenticationError('Missing bearer token.');
   }
 
+  const match = request.headers.authorization.match(/Bearer (.*)/);
+  const accessToken = match && match[1];
+  if (!accessToken) {
+    throw new AuthenticationError('Invalid Bearer token');
+  }
+
   let jwtBody: { sub: string } | null;
   try {
-    jwtBody = await parseJWT(request.headers.authorization);
+    jwtBody = await parseJWT(accessToken);
   } catch (err) {
-    throw new AuthenticationError('Invalid Bearer token.');
+    throw new AuthenticationError('Couldnt parse access token.');
   }
   return jwtBody.sub;
 }

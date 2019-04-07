@@ -18,9 +18,14 @@ const jwtOptions = {
   algorithms: ['RS256']
 };
 
-export async function parseJWT(authorization: string): Promise<{ sub: string }> {
+/**
+ * Parses a one-thing auth0 accesstoken and returns an object with the 'sub' id
+ * of the user in auth0.
+ * @param accessToken Authorization header value.
+ */
+export async function parseJWT(accessToken: string): Promise<{ sub: string }> {
   return await new Promise((resolve, reject) => {
-    jwt.verify(authorization!, getKey, jwtOptions, (err, decoded) => {
+    jwt.verify(accessToken!, getKey, jwtOptions, (err, decoded) => {
       if (err) {
         return reject(err);
       }

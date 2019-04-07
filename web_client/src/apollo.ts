@@ -63,7 +63,7 @@ const resolvers: Resolvers = {
 const authMiddleWare = new ApolloLink((operation, forward) => {
   operation.setContext({
     headers: {
-      authorization: localStorage.getItem('accessToken')
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`
     }
   });
   if (forward) {
