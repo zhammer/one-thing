@@ -1,9 +1,9 @@
-import { Gateways } from "../../types";
+import { Gateways, Person } from '../../types';
 
 export interface Context {
   gateways: Gateways;
   authInfo: {
-    userId: string;
+    person: Person;
   };
 }
 

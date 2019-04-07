@@ -1,12 +1,12 @@
-import { RelayConnection, Context } from "./types";
-import { Thing, Person } from "../../types";
+import { RelayConnection, Context } from './types';
+import { Thing, Person } from '../../types';
 import {
   getAllThingsThisWeek,
   submitThing,
   completePersonsThingThisWeek,
   getPersonsThingThisWeek
-} from "../../useThings";
-import { getPerson } from "../../usePersons";
+} from '../../useThings';
+import { getPerson } from '../../usePersons';
 
 export default {
   Query: {
@@ -28,13 +28,7 @@ export default {
       };
     },
     async me(_: any, __: any, context: Context): Promise<Person> {
-      const person = await getPerson(context.gateways, context.authInfo.userId);
-      if (!person) {
-        throw new Error(
-          `Couldnt find person with id ${context.authInfo.userId}`
-        );
-      }
-      return person;
+      return context.authInfo.person;
     }
   },
   Mutation: {
@@ -43,35 +37,20 @@ export default {
       args: { description: string },
       context: Context
     ): Promise<{ success: boolean }> {
-      await submitThing(
-        context.gateways,
-        context.authInfo.userId,
-        args.description
-      );
+      await submitThing(context.gateways, context.authInfo.person.id, args.description);
       return {
         success: true
       };
     },
-    async completeThingThisWeek(
-      _: any,
-      __: any,
-      context: Context
-    ): Promise<{ success: boolean }> {
-      await completePersonsThingThisWeek(
-        context.gateways,
-        context.authInfo.userId
-      );
+    async completeThingThisWeek(_: any, __: any, context: Context): Promise<{ success: boolean }> {
+      await completePersonsThingThisWeek(context.gateways, context.authInfo.person.id);
       return {
         success: true
       };
     }
   },
   Person: {
-    async thingThisWeek(
-      person: Person,
-      _: any,
-      { gateways }: Context
-    ): Promise<Thing | null> {
+    async thingThisWeek(person: Person, _: any, { gateways }: Context): Promise<Thing | null> {
       return await getPersonsThingThisWeek(gateways, person.id);
     }
   },

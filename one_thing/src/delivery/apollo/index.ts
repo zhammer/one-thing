@@ -1,32 +1,58 @@
-import { ApolloServer } from "apollo-server";
-const typeDefs = require("../../../../schema.graphql");
-import resolvers from "./resolvers";
-import { Gateways } from "../../types";
-import { TypeOrmDatabaseGateway } from "../../gateways/TypeOrmDatabaseGateway";
-import { Context } from "./types";
+import { ApolloServer, AuthenticationError } from 'apollo-server';
+const typeDefs = require('../../../../schema.graphql');
+import resolvers from './resolvers';
+import { Gateways } from '../../types';
+import { TypeOrmDatabaseGateway } from '../../gateways/TypeOrmDatabaseGateway';
+import { Context } from './types';
+import { parseJWT } from './auth';
+import { Request } from 'express';
+import Auth0Gateway from '../../gateways/auth0Gateway';
+import { login } from '../../useAuth';
 
 type MakeApolloServerOptions = {
   dev?: boolean;
 };
 
 export function makeApolloServer(options?: MakeApolloServerOptions) {
+  const auth0Token = process.env.AUTH0_MANAGEMENT_API_TOKEN || 'auth0token';
   const dev = Boolean(options && options.dev);
   const gateways: Gateways = {
-    databaseGateway: new TypeOrmDatabaseGateway({ dev })
+    databaseGateway: new TypeOrmDatabaseGateway({ dev }),
+    auth0Gateway: new Auth0Gateway(auth0Token)
   };
   return new ApolloServer({
     typeDefs,
     resolvers,
     ...(dev ? devOptions : {}),
     context: async ({ req }): Promise<Context> => {
+      const auth0UserId = await getAuth0UserId(req);
+      const person = await login(gateways, auth0UserId);
       return {
         gateways,
         authInfo: {
-          userId: "1"
+          person
         }
       };
     }
   });
+}
+
+/**
+ * Throws AuthenticationError on failure to get user.
+ * @param request Request from express server
+ */
+async function getAuth0UserId(request: Request): Promise<string> {
+  if (!request.headers.authorization) {
+    throw new AuthenticationError('Missing bearer token.');
+  }
+
+  let jwtBody: { sub: string } | null;
+  try {
+    jwtBody = await parseJWT(request.headers.authorization);
+  } catch (err) {
+    throw new AuthenticationError('Invalid Bearer token.');
+  }
+  return jwtBody.sub;
 }
 
 const devOptions = {
