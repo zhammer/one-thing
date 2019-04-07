@@ -16,6 +16,7 @@ const typeDefs = gql`
   }
   extend type Mutation {
     logOut: MutationResult!
+    logIn(accessToken: String!): MutationResult!
     setThingInputForm(text: String!): MutationResult!
   }
 `;
@@ -42,6 +43,11 @@ const resolvers: Resolvers = {
     logOut: (_, __, { cache }) => {
       localStorage.removeItem('accessToken');
       cache.writeData({ data: { isLoggedIn: false } });
+      return { success: true };
+    },
+    logIn: (_, { accessToken }: { accessToken: string }, { cache }) => {
+      localStorage.setItem('accessToken', accessToken);
+      cache.writeData({ data: { isLoggedIn: true } });
       return { success: true };
     },
     setThingInputForm: (_, data, { cache }) => {
