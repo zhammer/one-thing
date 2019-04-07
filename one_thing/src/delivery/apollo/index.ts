@@ -5,22 +5,18 @@ import { Gateways } from "../../types";
 import { TypeOrmDatabaseGateway } from "../../gateways/TypeOrmDatabaseGateway";
 import { Context } from "./types";
 
-export function makeApolloServer() {
+type MakeApolloServerOptions = {
+  dev?: boolean;
+};
+
+export function makeApolloServer(options?: MakeApolloServerOptions) {
   const gateways: Gateways = {
     databaseGateway: new TypeOrmDatabaseGateway()
   };
   return new ApolloServer({
     typeDefs,
     resolvers,
-    formatError: error => {
-      console.log(error);
-      return error;
-    },
-    formatResponse: (response: any) => {
-      console.log(response);
-      return response;
-    },
-    playground: true,
+    ...(options && options.dev ? devOptions : {}),
     context: async ({ req }): Promise<Context> => {
       return {
         gateways,
@@ -31,3 +27,15 @@ export function makeApolloServer() {
     }
   });
 }
+
+const devOptions = {
+  formatError: (error: any) => {
+    console.log(error);
+    return error;
+  },
+  formatResponse: (response: any) => {
+    console.log(response);
+    return response;
+  },
+  playground: true
+};
