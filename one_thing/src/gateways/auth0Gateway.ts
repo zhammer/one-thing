@@ -1,9 +1,9 @@
-import { Auth0Gateway as Auth0GatewayInterface, UserInfo } from "../types";
-import request from "superagent";
-import { Auth0Error } from "../exceptions";
+import { Auth0Gateway as Auth0GatewayInterface, UserInfo } from '../types';
+import request from 'superagent';
+import { Auth0Error } from '../exceptions';
 
 export default class Auth0Gateway implements Auth0GatewayInterface {
-  private url: string = "https://zhammer.auth0.com/api/v2";
+  private url: string = 'https://zhammer.auth0.com/api/v2';
   private accessToken: string;
 
   constructor(accessToken: string) {
@@ -13,7 +13,7 @@ export default class Auth0Gateway implements Auth0GatewayInterface {
   async fetchUserInfo(auth0UserId: string): Promise<UserInfo> {
     const response = await request
       .get(`${this.url}/users/${auth0UserId}`)
-      .set("Authorization", `Bearer ${this.accessToken}`);
+      .set('Authorization', `Bearer ${this.accessToken}`);
     if (response.status !== 200) {
       throw new Auth0Error();
     }

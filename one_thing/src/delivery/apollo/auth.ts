@@ -1,8 +1,8 @@
-import jwt from "jsonwebtoken";
-import jwksClient from "jwks-rsa";
+import jwt from 'jsonwebtoken';
+import jwksClient from 'jwks-rsa';
 
 const client = jwksClient({
-  jwksUri: "https://zhammer.auth0.com/.well-known/jwks.json"
+  jwksUri: 'https://zhammer.auth0.com/.well-known/jwks.json'
 });
 
 function getKey(header: any, cb: any) {
@@ -13,14 +13,12 @@ function getKey(header: any, cb: any) {
 }
 
 const jwtOptions = {
-  audience: "https://zhammer.auth0.com/api/v2/",
-  issuer: "https://zhammer.auth0.com/",
-  algorithms: ["RS256"]
+  audience: 'https://zhammer.auth0.com/api/v2/',
+  issuer: 'https://zhammer.auth0.com/',
+  algorithms: ['RS256']
 };
 
-export async function parseJWT(
-  authorization: string
-): Promise<{ sub: string }> {
+export async function parseJWT(authorization: string): Promise<{ sub: string }> {
   return await new Promise((resolve, reject) => {
     jwt.verify(authorization!, getKey, jwtOptions, (err, decoded) => {
       if (err) {

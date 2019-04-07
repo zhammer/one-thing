@@ -1,4 +1,4 @@
-import { makeApolloServer } from "./apollo";
+import { makeApolloServer } from './apollo';
 
 const server = makeApolloServer({
   dev: true

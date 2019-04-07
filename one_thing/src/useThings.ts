@@ -1,13 +1,8 @@
-import { Gateways, Thing } from "./types";
-import { weekTimeRange } from "./util";
-import {
-  AlreadySubmittedThingThisWeekError,
-  NoThingThisWeekError
-} from "./exceptions";
+import { Gateways, Thing } from './types';
+import { weekTimeRange } from './util';
+import { AlreadySubmittedThingThisWeekError, NoThingThisWeekError } from './exceptions';
 
-export async function getAllThingsThisWeek(
-  gateways: Gateways
-): Promise<Thing[]> {
+export async function getAllThingsThisWeek(gateways: Gateways): Promise<Thing[]> {
   const now = new Date();
   const { from, to } = weekTimeRange(now);
   return await gateways.databaseGateway.fetchThings({
@@ -45,14 +40,9 @@ export async function completePersonsThingThisWeek(
   gateways: Gateways,
   personId: string
 ): Promise<null> {
-  const personsThingThisWeek = await getPersonsThingThisWeek(
-    gateways,
-    personId
-  );
+  const personsThingThisWeek = await getPersonsThingThisWeek(gateways, personId);
   if (!personsThingThisWeek) {
     throw new NoThingThisWeekError();
   }
-  return await gateways.databaseGateway.setThingComplete(
-    personsThingThisWeek.id
-  );
+  return await gateways.databaseGateway.setThingComplete(personsThingThisWeek.id);
 }
