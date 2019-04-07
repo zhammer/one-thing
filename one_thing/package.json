@@ -1,0 +1,26 @@
+{
+  "name": "one_thing",
+  "version": "1.0.0",
+  "description": "Backend for one_thing",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "@types/webpack-env": "^1.13.9",
+    "clean-webpack-plugin": "^2.0.1",
+    "graphql-tag": "^2.10.1",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.4.2",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-merge": "^4.2.1",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "apollo-server": "^2.4.8",
+    "date-fns": "^1.30.1",
+    "graphql": "^14.2.1",
+    "typeorm": "^0.2.16"
+  }
+}
