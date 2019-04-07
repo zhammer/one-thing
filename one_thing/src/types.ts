@@ -34,6 +34,6 @@ export interface DatabaseGateway {
     options?: QueryOptions
   ) => Promise<Thing[]>;
   addThing: (personId: string, description: string) => Promise<Thing>;
-  setThingComplete: (thingId: string) => Promise<Thing>;
+  setThingComplete: (thingId: string) => Promise<null>;
   fetchPerson: (personId: string) => Promise<Person | null>;
 }

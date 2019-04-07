@@ -44,7 +44,7 @@ export async function submitThing(
 export async function completePersonsThingThisWeek(
   gateways: Gateways,
   personId: string
-): Promise<Thing> {
+): Promise<null> {
   const personsThingThisWeek = await getPersonsThingThisWeek(
     gateways,
     personId

@@ -50,16 +50,12 @@ export class InMemoryDatabaseGateway implements DatabaseGateway {
     return thing;
   }
 
-  async setThingComplete(thingId: string): Promise<Thing> {
+  async setThingComplete(thingId: string): Promise<null> {
     this.things = this.things.map(thing => ({
       ...thing,
       complete: thing.id === thingId ? true : thing.complete
     }));
-    const thing = this.things.find(thing => thing.id === thingId);
-    if (!thing) {
-      throw new Error("oops");
-    }
-    return thing;
+    return null;
   }
 
   async fetchPerson(personId: string): Promise<Person | null> {
