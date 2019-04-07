@@ -41,7 +41,7 @@ export class TypeOrmDatabaseGateway implements DatabaseGateway {
       query.andWhere("thing.createdAt > :from", { from: options.from });
     }
     if (options && options.to) {
-      // can't figure out why this is breaking this query
+      console.warn("`to` date is being ignored at the moment.");
       // query.andWhere("thing.createdAt < :to", { to: options.to });
     }
     return await query.getMany();
@@ -59,7 +59,7 @@ export class TypeOrmDatabaseGateway implements DatabaseGateway {
       query = query.andWhere("createdAt > :from", { from: options.from });
     }
     if (options && options.to) {
-      // breaking
+      console.warn("`to` date is being ignored at the moment.");
       // query = query.andWhere("createdAt < :to", { to: options.to });
     }
     return await query.getMany();
