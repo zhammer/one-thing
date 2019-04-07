@@ -2,7 +2,8 @@ import gql from 'graphql-tag';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient, Resolvers } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
-import { ApolloLink, concat } from 'apollo-link';
+import { onError } from 'apollo-link-error';
+import { ApolloLink } from 'apollo-link';
 
 const GRAPHQL_ENDPOINT = process.env.REACT_APP_GRAPHQL_ENDPOINT || '/graphql';
 
@@ -71,16 +72,33 @@ const authMiddleWare = new ApolloLink((operation, forward) => {
   }
   return null;
 });
+const authErrorAfterware = onError(({ graphQLErrors, operation }) => {
+  if (!graphQLErrors) {
+    return;
+  }
+  if (
+    graphQLErrors.find(
+      err => err.extensions && err.extensions.code === 'UNAUTHENTICATED'
+    )
+  ) {
+    const { cache } = operation.getContext();
+    localStorage.removeItem('accessToken');
+    cache.writeData({
+      data: { isLoggedIn: false }
+    });
+  }
+});
 const httpLink = createHttpLink({
   uri: GRAPHQL_ENDPOINT
 });
+const link = ApolloLink.from([authMiddleWare, authErrorAfterware, httpLink]);
 
 /**
  * CLIENT
  */
 export const client = new ApolloClient({
   cache,
-  link: concat(authMiddleWare, httpLink),
+  link,
   resolvers,
   typeDefs
 });

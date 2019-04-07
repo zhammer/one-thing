@@ -13,6 +13,7 @@
     "@types/styled-components": "^4.1.11",
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-client": "^2.5.1",
+    "apollo-link-error": "^1.1.10",
     "apollo-link-http": "^1.5.12",
     "auth0-js": "^9.10.1",
     "cypress-graphql-mock": "^0.1.1",
