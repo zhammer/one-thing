@@ -65,3 +65,9 @@ Feature: Me Page
     When I visit the Me page
     Then I see the title "Me"
     And I see the subtitle "There was an error."
+
+#  I can't figure out how to stub an error response from the mock graphql server.
+#  Scenario: There is an auth error fetching my Thing this week
+#    Given there is a problem with my authentication
+#    When I visit the Me page
+#    Then I am redirected to the page "/login"
