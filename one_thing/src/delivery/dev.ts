@@ -1,7 +1,7 @@
 import { makeApolloServer } from "./apollo";
 
 const server = makeApolloServer({
-  dev: true
+  dev: false
 });
 server.listen(4000).then(({ url }) => console.log(`Server ready at ${url}`));
 

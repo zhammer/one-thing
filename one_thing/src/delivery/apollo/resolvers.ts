@@ -72,7 +72,6 @@ export default {
       _: any,
       { gateways }: Context
     ): Promise<Thing | null> {
-      console.log(person);
       return await getPersonsThingThisWeek(gateways, person.id);
     }
   },

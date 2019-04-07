@@ -10,13 +10,14 @@ type MakeApolloServerOptions = {
 };
 
 export function makeApolloServer(options?: MakeApolloServerOptions) {
+  const dev = Boolean(options && options.dev);
   const gateways: Gateways = {
-    databaseGateway: new TypeOrmDatabaseGateway()
+    databaseGateway: new TypeOrmDatabaseGateway({ dev })
   };
   return new ApolloServer({
     typeDefs,
     resolvers,
-    ...(options && options.dev ? devOptions : {}),
+    ...(dev ? devOptions : {}),
     context: async ({ req }): Promise<Context> => {
       return {
         gateways,

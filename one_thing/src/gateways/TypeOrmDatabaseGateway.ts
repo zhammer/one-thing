@@ -5,22 +5,27 @@ import {
   Connection,
   ConnectionManager,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  ManyToOne
 } from "typeorm";
 import { Thing, Person, DatabaseGateway, QueryOptions } from "../types";
+
+const devOptions = {
+  synchronize: true,
+  logging: true
+};
 
 export class TypeOrmDatabaseGateway implements DatabaseGateway {
   private connection!: Connection;
 
-  constructor() {
+  constructor(options?: { dev: boolean }) {
     const connectionManager = new ConnectionManager();
     connectionManager
       .create({
         type: "sqlite",
         database: "one-thing.sqlite",
         entities: [ThingModel, PersonModel],
-        synchronize: true,
-        logging: true
+        ...(options && options.dev ? devOptions : {})
       })
       .connect()
       .then(connection => {
@@ -97,6 +102,10 @@ class ThingModel implements Thing {
 
   @Column()
   personId!: string;
+
+  // https://typeorm.io/#/relations-faq/how-to-use-relation-id-without-joining-relation
+  @ManyToOne(type => PersonModel)
+  person!: PersonModel;
 
   @Column()
   description!: string;
