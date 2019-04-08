@@ -30,8 +30,14 @@ Feature: SeatGeek Page
 
   Scenario: I want to email a Person who posted a Thing
     Given the following things have been submitted this week:
-      | id | firstName | lastName | description                | email     | complete | createdAt           |
-      | 1  | Zach      | Hammer   | Learn about interviewing.  | zh@sg.com | false    | 2019-03-16T00:10:15 |
+      | id | firstName | lastName | description               | email     | complete | createdAt           |
+      | 1  | Zach      | Hammer   | Learn about interviewing. | zh@sg.com | false    | 2019-03-16T00:10:15 |
     When I visit the SeatGeek page
     Then there is a contact link that says "Zach H"
     And the contact link opens an email to "zh@sg.com" with the subject "Re: Learn about interviewing."
+
+  Scenario: The page is loading
+    Given nobody at SeatGeek has submitted a Thing this week
+    When I visit the SeatGeek page
+    Then I see the subtitle placeholder
+    Then I dont see the subtitle placeholder

@@ -66,6 +66,12 @@ Feature: Me Page
     Then I see the title "Me"
     And I see the subtitle "There was an error."
 
+  Scenario: The page is loading
+    Given I havent submitted a thing this week
+    When I visit the Me page
+    Then I see the subtitle placeholder
+    Then I dont see the subtitle placeholder
+
 #  I can't figure out how to stub an error response from the mock graphql server.
 #  Scenario: There is an auth error fetching my Thing this week
 #    Given there is a problem with my authentication
