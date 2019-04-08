@@ -10,6 +10,7 @@ import { Body, ThingTextArea, Danger } from './MePage.styles';
 import Thing from '../../components/Thing';
 import useFocusOnMount from '../../hooks/useFocusOnMount';
 import { getRandomItem } from '../../util';
+import SubtitlePlaceholder from '../../components/SubtitlePlaceholder';
 
 const MY_THING_THIS_WEEK = gql`
   query MyThingThisWeek {
@@ -113,7 +114,7 @@ export default function MePage() {
     <Page>
       <Title>Me</Title>
       {loading ? (
-        'Loading...'
+        <SubtitlePlaceholder />
       ) : error ? (
         <Subtitle>
           <Danger>There was an error.</Danger>

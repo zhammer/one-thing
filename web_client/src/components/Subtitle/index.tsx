@@ -1,7 +1,7 @@
 import styled from '../../custom/styled-components';
 import { mobileBreakpoint } from '../../styles/variables';
 
-const Subtitle = styled.h2`
+const Subtitle = styled.h2.attrs({ 'data-class-name': 'subtitle' })`
   color: ${props => props.theme.secondary};
   font-size: 1.25rem;
   font-weight: 200;

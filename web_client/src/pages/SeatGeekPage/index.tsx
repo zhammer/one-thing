@@ -8,6 +8,7 @@ import { useQuery } from 'react-apollo-hooks';
 import { ThingInterface } from '../../types';
 import Thing from '../../components/Thing';
 import { ThingsContainer, Danger } from './SeatGeekPage.styles';
+import SubtitlePlaceholder from '../../components/SubtitlePlaceholder';
 
 const GET_THIS_WEEK_SEATGEEK_THINGS = gql`
   query SeatGeekThingsThisWeek {
@@ -45,7 +46,7 @@ export default function SeatGeekPage() {
     <Page>
       <Title>SeatGeek</Title>
       {loading ? (
-        'Loading...'
+        <SubtitlePlaceholder />
       ) : (
         <>
           <Subtitle>

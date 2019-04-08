@@ -7,6 +7,7 @@ export interface ThemeInterface {
   background: string;
   highlight: string;
   seatgeekBlue: string;
+  seatgeekBlueLight: string;
   danger: string;
 }
 
@@ -17,6 +18,7 @@ const theme: ThemeInterface = {
   background: '#fbfbfb',
   highlight: '#ebebec',
   seatgeekBlue: '#1673e6',
+  seatgeekBlueLight: lighten(0.48, '#1673e6'),
   danger: '#f22b29'
 };
 
