@@ -16,9 +16,10 @@ type MakeApolloServerOptions = {
 export function makeApolloServer(options?: MakeApolloServerOptions) {
   const auth0ClientId = process.env.AUTH0_CLIENT_ID || 'auth0_client_id';
   const auth0ClientSecret = process.env.AUTH0_CLIENT_SECRET || 'auth0_client_secret';
+  const postgresUrl = process.env.DATABASE_CONNECTION_STRING;
   const dev = Boolean(options && options.dev);
   const gateways: Gateways = {
-    databaseGateway: new TypeOrmDatabaseGateway({ dev }),
+    databaseGateway: new TypeOrmDatabaseGateway({ dev, postgresUrl }),
     auth0Gateway: new Auth0Gateway(auth0ClientId, auth0ClientSecret)
   };
   return new ApolloServer({

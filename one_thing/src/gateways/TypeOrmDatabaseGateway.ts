@@ -9,6 +9,7 @@ import {
   ManyToOne,
   Index
 } from 'typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { Thing, Person, DatabaseGateway, QueryOptions } from '../types';
 
 const devOptions = {
@@ -19,14 +20,19 @@ const devOptions = {
 export class TypeOrmDatabaseGateway implements DatabaseGateway {
   private connection!: Connection;
 
-  constructor(options?: { dev: boolean }) {
+  constructor(options: { dev: boolean; postgresUrl?: string }) {
     const connectionManager = new ConnectionManager();
+    const dbConfig:
+      | { type: 'postgres'; url: string }
+      | { type: 'sqlite'; database: string } = options.postgresUrl
+      ? { type: 'postgres', url: options.postgresUrl }
+      : { type: 'sqlite', database: 'one-thing.sqlite' };
     connectionManager
       .create({
-        type: 'sqlite',
-        database: 'one-thing.sqlite',
+        namingStrategy: new SnakeNamingStrategy(),
+        ...dbConfig,
         entities: [ThingModel, PersonModel],
-        ...(options && options.dev ? devOptions : {})
+        ...(options.dev ? devOptions : {})
       })
       .connect()
       .then(connection => {
@@ -37,11 +43,11 @@ export class TypeOrmDatabaseGateway implements DatabaseGateway {
   async fetchThings(options?: QueryOptions): Promise<Thing[]> {
     let query = this.connection.getRepository(ThingModel).createQueryBuilder('thing');
     if (options && options.from) {
-      query.andWhere('thing.createdAt > :from', { from: options.from });
+      query.andWhere('thing.created_at > :from', { from: options.from });
     }
     if (options && options.to) {
       console.warn('`to` date is being ignored at the moment.');
-      // query.andWhere("thing.createdAt < :to", { to: options.to });
+      // query.andWhere("thing.created_at < :to", { to: options.to });
     }
     return await query.getMany();
   }
@@ -50,13 +56,13 @@ export class TypeOrmDatabaseGateway implements DatabaseGateway {
     let query = this.connection
       .getRepository(ThingModel)
       .createQueryBuilder('thing')
-      .where('thing.personId = :personId', { personId });
+      .where('thing.person_id = :personId', { personId });
     if (options && options.from) {
-      query = query.andWhere('createdAt > :from', { from: options.from });
+      query = query.andWhere('created_at > :from', { from: options.from });
     }
     if (options && options.to) {
       console.warn('`to` date is being ignored at the moment.');
-      // query = query.andWhere("createdAt < :to", { to: options.to });
+      // query = query.andWhere("created_at < :to", { to: options.to });
     }
     return await query.getMany();
   }
@@ -109,7 +115,7 @@ export class TypeOrmDatabaseGateway implements DatabaseGateway {
       .getRepository(PersonModel)
       .createQueryBuilder('person')
       .select()
-      .where('auth0UserId = :auth0UserId', { auth0UserId });
+      .where('auth0_user_id = :auth0UserId', { auth0UserId });
     return (await query.getOne()) || null;
   }
 }
