@@ -7,6 +7,7 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo-hooks';
 import AuthenticatedApp from './AuthenticatedApp';
 import { client } from './apollo';
+import CallbackPage from './pages/CallbackPage';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Router>
             <Switch>
               <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/callback" component={CallbackPage} />
               <Route path="/" component={AuthenticatedApp} />
             </Switch>
           </Router>

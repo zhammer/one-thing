@@ -6,9 +6,10 @@ import {
   ConnectionManager,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne
-} from "typeorm";
-import { Thing, Person, DatabaseGateway, QueryOptions } from "../types";
+  ManyToOne,
+  Index
+} from 'typeorm';
+import { Thing, Person, DatabaseGateway, QueryOptions } from '../types';
 
 const devOptions = {
   synchronize: true,
@@ -22,8 +23,8 @@ export class TypeOrmDatabaseGateway implements DatabaseGateway {
     const connectionManager = new ConnectionManager();
     connectionManager
       .create({
-        type: "sqlite",
-        database: "one-thing.sqlite",
+        type: 'sqlite',
+        database: 'one-thing.sqlite',
         entities: [ThingModel, PersonModel],
         ...(options && options.dev ? devOptions : {})
       })
@@ -34,32 +35,27 @@ export class TypeOrmDatabaseGateway implements DatabaseGateway {
   }
 
   async fetchThings(options?: QueryOptions): Promise<Thing[]> {
-    let query = this.connection
-      .getRepository(ThingModel)
-      .createQueryBuilder("thing");
+    let query = this.connection.getRepository(ThingModel).createQueryBuilder('thing');
     if (options && options.from) {
-      query.andWhere("thing.createdAt > :from", { from: options.from });
+      query.andWhere('thing.createdAt > :from', { from: options.from });
     }
     if (options && options.to) {
-      console.warn("`to` date is being ignored at the moment.");
+      console.warn('`to` date is being ignored at the moment.');
       // query.andWhere("thing.createdAt < :to", { to: options.to });
     }
     return await query.getMany();
   }
 
-  async fetchThingsOfPerson(
-    personId: string,
-    options?: QueryOptions
-  ): Promise<Thing[]> {
+  async fetchThingsOfPerson(personId: string, options?: QueryOptions): Promise<Thing[]> {
     let query = this.connection
       .getRepository(ThingModel)
-      .createQueryBuilder("thing")
-      .where("thing.personId = :personId", { personId });
+      .createQueryBuilder('thing')
+      .where('thing.personId = :personId', { personId });
     if (options && options.from) {
-      query = query.andWhere("createdAt > :from", { from: options.from });
+      query = query.andWhere('createdAt > :from', { from: options.from });
     }
     if (options && options.to) {
-      console.warn("`to` date is being ignored at the moment.");
+      console.warn('`to` date is being ignored at the moment.');
       // query = query.andWhere("createdAt < :to", { to: options.to });
     }
     return await query.getMany();
@@ -72,6 +68,20 @@ export class TypeOrmDatabaseGateway implements DatabaseGateway {
     return await this.connection.getRepository(ThingModel).save(thingInput);
   }
 
+  async addPerson(
+    auth0UserId: string,
+    email: string,
+    firstName: string,
+    lastName: string
+  ): Promise<Person> {
+    const personInput = new PersonModel();
+    personInput.auth0UserId = auth0UserId;
+    personInput.email = email;
+    personInput.firstName = firstName;
+    personInput.lastName = lastName;
+    return await this.connection.getRepository(PersonModel).save(personInput);
+  }
+
   async setThingComplete(thingId: string): Promise<null> {
     await this.connection
       .createQueryBuilder()
@@ -79,7 +89,7 @@ export class TypeOrmDatabaseGateway implements DatabaseGateway {
       .set({
         complete: true
       })
-      .where("id = :id", { id: thingId })
+      .where('id = :id', { id: thingId })
       .execute();
     return null;
   }
@@ -87,15 +97,24 @@ export class TypeOrmDatabaseGateway implements DatabaseGateway {
   async fetchPerson(personId: string): Promise<Person | null> {
     const query = this.connection
       .getRepository(PersonModel)
-      .createQueryBuilder("person")
+      .createQueryBuilder('person')
       .select()
-      .where("id = :id", { id: personId });
+      .where('id = :id', { id: personId });
     const person = await query.getOne();
     return person || null;
   }
+
+  async fetchPersonByAuth0UserId(auth0UserId: string): Promise<Person | null> {
+    const query = this.connection
+      .getRepository(PersonModel)
+      .createQueryBuilder('person')
+      .select()
+      .where('auth0UserId = :auth0UserId', { auth0UserId });
+    return (await query.getOne()) || null;
+  }
 }
 
-@Entity({ name: "things" })
+@Entity({ name: 'things' })
 class ThingModel implements Thing {
   @PrimaryGeneratedColumn()
   id!: string;
@@ -120,7 +139,7 @@ class ThingModel implements Thing {
   updatedAt!: Date;
 }
 
-@Entity({ name: "persons" })
+@Entity({ name: 'persons' })
 class PersonModel implements Person {
   @PrimaryGeneratedColumn()
   id!: string;
@@ -133,6 +152,10 @@ class PersonModel implements Person {
 
   @Column()
   email!: string;
+
+  @Column()
+  @Index()
+  auth0UserId!: string;
 
   @CreateDateColumn()
   createdAt!: Date;

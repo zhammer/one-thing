@@ -8,9 +8,15 @@ import { isMobile } from 'react-device-detect';
 import { ExampleContainer, ButtonContainer } from './LoginPage.styles';
 import { ThingInterface } from '../../types';
 import SeatGeekBlue from '../../components/SeatGeekBlue';
+import Auth from '../../auth';
 
 export default function LoginPage() {
   const things = isMobile ? mobileThings : allThings;
+
+  function handleLoginButtonClicked() {
+    new Auth().login();
+  }
+
   return (
     <Page>
       <Title>One Thing</Title>
@@ -24,7 +30,9 @@ export default function LoginPage() {
         ))}
       </ExampleContainer>
       <ButtonContainer>
-        <Button.Primary>Sign in with Gmail</Button.Primary>
+        <Button.Primary onClick={handleLoginButtonClicked}>
+          Sign in with Gmail
+        </Button.Primary>
       </ButtonContainer>
     </Page>
   );
