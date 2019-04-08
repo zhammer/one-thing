@@ -14,11 +14,12 @@ type MakeApolloServerOptions = {
 };
 
 export function makeApolloServer(options?: MakeApolloServerOptions) {
-  const auth0Token = process.env.AUTH0_MANAGEMENT_API_TOKEN || 'auth0token';
+  const auth0ClientId = process.env.AUTH0_CLIENT_ID || 'auth0_client_id';
+  const auth0ClientSecret = process.env.AUTH0_CLIENT_SECRET || 'auth0_client_secret';
   const dev = Boolean(options && options.dev);
   const gateways: Gateways = {
     databaseGateway: new TypeOrmDatabaseGateway({ dev }),
-    auth0Gateway: new Auth0Gateway(auth0Token)
+    auth0Gateway: new Auth0Gateway(auth0ClientId, auth0ClientSecret)
   };
   return new ApolloServer({
     typeDefs,
