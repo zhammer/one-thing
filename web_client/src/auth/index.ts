@@ -4,7 +4,7 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'zhammer.auth0.com',
     clientID: 'N0Hu8ge6XVTo4VEnIDWpcVqlOyz5VQ7D',
-    redirectUri: 'http://localhost:3000/callback',
+    redirectUri: `${window.location.origin}/callback`,
     responseType: 'token id_token',
     scope: 'openid',
     audience: 'https://zhammer.auth0.com/api/v2/'
