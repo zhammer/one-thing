@@ -41,9 +41,9 @@ const resolvers: Resolvers = {
     isLoggedIn: (_, __, { cache }) => cache.isLoggedIn
   },
   Mutation: {
-    logOut: (_, __, { cache }) => {
+    logOut: (_, __, { client }) => {
       localStorage.removeItem('accessToken');
-      cache.writeData({ data: { isLoggedIn: false } });
+      client.resetStore();
       return { success: true };
     },
     logIn: (_, { accessToken }: { accessToken: string }, { cache }) => {
@@ -83,6 +83,7 @@ const authErrorAfterware = onError(({ graphQLErrors, operation }) => {
   ) {
     const { cache } = operation.getContext();
     localStorage.removeItem('accessToken');
+    cache.reset();
     cache.writeData({
       data: { isLoggedIn: false }
     });
@@ -101,4 +102,12 @@ export const client = new ApolloClient({
   link,
   resolvers,
   typeDefs
+});
+client.onResetStore(async () => {
+  cache.writeData({
+    data: {
+      isLoggedIn: Boolean(localStorage.getItem('accessToken')),
+      thingInputForm: ''
+    }
+  });
 });
