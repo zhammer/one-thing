@@ -73,6 +73,10 @@ Feature: Me Page
     Then I see the subtitle placeholder
     Then I dont see the subtitle placeholder
 
+  Scenario: The root page redirects to /me
+    When I visit the root page
+    Then I am redirected to the page "/me"
+
 #  I can't figure out how to stub an error response from the mock graphql server.
 #  Scenario: There is an auth error fetching my Thing this week
 #    Given there is a problem with my authentication
