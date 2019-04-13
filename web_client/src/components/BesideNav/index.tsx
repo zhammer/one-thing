@@ -1,9 +1,5 @@
 import styled from '../../custom/styled-components';
-import {
-  mobileBreakpoint,
-  navbarWidth,
-  mobileNavbarHeight
-} from '../../styles/variables';
+import { mobileBreakpoint, navbarWidth, mobileNavbarHeight } from '../../styles/variables';
 
 const BesideNav = styled.div`
   padding: 0 0 ${mobileNavbarHeight} 0;

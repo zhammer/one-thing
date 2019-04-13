@@ -52,7 +52,8 @@
   },
   "prettier": {
     "tabWidth": 2,
-    "singleQuote": true
+    "singleQuote": true,
+    "printWidth": 100
   },
   "devDependencies": {
     "cypress": "^3.2.0",

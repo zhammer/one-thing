@@ -15,19 +15,17 @@ export default class Auth {
   }
 
   async parseAccessToken(): Promise<string> {
-    const authResult = await new Promise<Auth0DecodedHash>(
-      (resolve, reject) => {
-        this.auth0.parseHash((err, authResult) => {
-          if (err) {
-            reject(err);
-          } else if (authResult === null) {
-            reject('Missing auth result');
-          } else {
-            resolve(authResult);
-          }
-        });
-      }
-    );
+    const authResult = await new Promise<Auth0DecodedHash>((resolve, reject) => {
+      this.auth0.parseHash((err, authResult) => {
+        if (err) {
+          reject(err);
+        } else if (authResult === null) {
+          reject('Missing auth result');
+        } else {
+          resolve(authResult);
+        }
+      });
+    });
     if (!authResult.accessToken) {
       throw new Error('Missing access token');
     }

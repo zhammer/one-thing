@@ -1,9 +1,5 @@
 import styled from '../../custom/styled-components';
-import {
-  navbarWidth,
-  mobileBreakpoint,
-  mobileNavbarHeight
-} from '../../styles/variables';
+import { navbarWidth, mobileBreakpoint, mobileNavbarHeight } from '../../styles/variables';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
@@ -85,10 +81,8 @@ interface ActiveProps {
 }
 
 const NavItemIcon = styled(NavItemBase)<ActiveProps>`
-  color: ${props =>
-    props.active ? props.theme.secondary : props.theme.secondaryLight};
-  fill: ${props =>
-    props.active ? props.theme.secondary : props.theme.secondaryLight};
+  color: ${props => (props.active ? props.theme.secondary : props.theme.secondaryLight)};
+  fill: ${props => (props.active ? props.theme.secondary : props.theme.secondaryLight)};
   display: flex;
   flex-direction: column;
   align-items: center;

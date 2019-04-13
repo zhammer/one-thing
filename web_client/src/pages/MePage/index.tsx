@@ -69,22 +69,20 @@ const COMPLETE_THING_THIS_WEEK = gql`
 `;
 
 export default function MePage() {
-  const { data: myThingThisWeekQueryData, error, loading } = useQuery<
-    MyThingThisWeekQueryData
-  >(MY_THING_THIS_WEEK);
+  const { data: myThingThisWeekQueryData, error, loading } = useQuery<MyThingThisWeekQueryData>(
+    MY_THING_THIS_WEEK
+  );
   const { data: thingInputFormQueryData } = useQuery<{
     thingInputForm: string;
   }>(THING_INPUT_FORM);
   const setThingInputForm = useMutation(SET_THING_INPUT_FORM);
   const submitThing = useMutation(SUBMIT_THING);
   const completeThingThisWeek = useMutation(COMPLETE_THING_THIS_WEEK);
-  const thingThisWeek = useMemo(
-    () => pluckThingThisWeek(myThingThisWeekQueryData),
-    [myThingThisWeekQueryData]
-  );
+  const thingThisWeek = useMemo(() => pluckThingThisWeek(myThingThisWeekQueryData), [
+    myThingThisWeekQueryData
+  ]);
   const thingInput = useMemo(
-    () =>
-      thingInputFormQueryData ? thingInputFormQueryData.thingInputForm : '',
+    () => (thingInputFormQueryData ? thingInputFormQueryData.thingInputForm : ''),
     [thingInputFormQueryData]
   );
   const focusProps = useFocusOnMount();
@@ -139,9 +137,7 @@ export default function MePage() {
               <>
                 <Thing thing={thingThisWeek} />
                 {!thingThisWeek.complete && (
-                  <Button.Primary onClick={handleCompleteClicked}>
-                    Complete
-                  </Button.Primary>
+                  <Button.Primary onClick={handleCompleteClicked}>Complete</Button.Primary>
                 )}
               </>
             ) : (
@@ -153,10 +149,7 @@ export default function MePage() {
                   value={thingInput}
                   data-class-name="thing-input-form"
                 />
-                <Button.Primary
-                  disabled={thingInput.length === 0}
-                  onClick={handleSubmitClicked}
-                >
+                <Button.Primary disabled={thingInput.length === 0} onClick={handleSubmitClicked}>
                   Submit
                 </Button.Primary>
               </>
@@ -176,9 +169,7 @@ const placeholderOptions = [
 ];
 const placeholder = getRandomItem(placeholderOptions);
 
-function pluckThingThisWeek(
-  data: MyThingThisWeekQueryData | undefined
-): ThingInterface | null {
+function pluckThingThisWeek(data: MyThingThisWeekQueryData | undefined): ThingInterface | null {
   if (!data || !data.me) {
     return null;
   }

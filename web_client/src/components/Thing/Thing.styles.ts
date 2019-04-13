@@ -13,9 +13,7 @@ export const Container = styled.div<ContainerProps>`
   font-weight: 300;
   background: white;
   padding: 0.75em 1em;
-  border: 2px solid
-    ${props =>
-      props.complete ? props.theme.seatgeekBlue : props.theme.primary};
+  border: 2px solid ${props => (props.complete ? props.theme.seatgeekBlue : props.theme.primary)};
   border-radius: 0.25em;
   width: 80%;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.075);

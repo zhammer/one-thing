@@ -11,13 +11,7 @@ interface UseConfettiParticlesStylesSettings {
   topOffset: number;
 }
 
-const DEFAULT_COLOR_OPTIONS = [
-  '#2ecc71',
-  '#3498db',
-  '#e67e22',
-  '#e67e22',
-  '#e74c3c'
-];
+const DEFAULT_COLOR_OPTIONS = ['#2ecc71', '#3498db', '#e67e22', '#e67e22', '#e74c3c'];
 
 function useConfettiParticleStyles({
   sizeRange,
@@ -29,9 +23,7 @@ function useConfettiParticleStyles({
   const [color] = useState(() => getRandomItem(colorOptions));
   const [size] = useState(() => randomWholeNumber(...sizeRange));
   const [rotation] = useState(() => randomWholeNumber(...rotationRange));
-  const [left, setLeft] = useState(() =>
-    randomWholeNumber(0, window.innerWidth)
-  );
+  const [left, setLeft] = useState(() => randomWholeNumber(0, window.innerWidth));
   const [top, setTop] = useState(() => randomWholeNumber(-topOffset, 0));
 
   useEffect(() => {
@@ -50,9 +42,7 @@ function useConfettiParticleStyles({
   };
 }
 
-function useConfettiParticleStylesDiv(
-  settings: UseConfettiParticlesStylesSettings
-) {
+function useConfettiParticleStylesDiv(settings: UseConfettiParticlesStylesSettings) {
   const { size, color, ...rest } = useConfettiParticleStyles(settings);
   return {
     width: size,
@@ -63,9 +53,7 @@ function useConfettiParticleStylesDiv(
   };
 }
 
-function useConfettiParticleStylesSVG(
-  settings: UseConfettiParticlesStylesSettings
-) {
+function useConfettiParticleStylesSVG(settings: UseConfettiParticlesStylesSettings) {
   const { size, color, ...rest } = useConfettiParticleStyles(settings);
   return {
     width: size,

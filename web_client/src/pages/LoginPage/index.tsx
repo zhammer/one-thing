@@ -30,9 +30,7 @@ export default function LoginPage() {
         ))}
       </ExampleContainer>
       <ButtonContainer>
-        <Button.Primary onClick={handleLoginButtonClicked}>
-          Sign in with Gmail
-        </Button.Primary>
+        <Button.Primary onClick={handleLoginButtonClicked}>Sign in with Gmail</Button.Primary>
       </ButtonContainer>
     </Page>
   );
@@ -62,8 +60,7 @@ const allThings: ThingInterface[] = [
   },
   {
     id: '3',
-    description:
-      'Enjoy the nice weather with a coworker for lunch at washington square park.',
+    description: 'Enjoy the nice weather with a coworker for lunch at washington square park.',
     person: {
       firstName: 'Peyton',
       lastName: 'Manning',
@@ -83,8 +80,7 @@ const allThings: ThingInterface[] = [
   },
   {
     id: '5',
-    description:
-      'Figure out what caused several SGO transfers to fail over the weekend.',
+    description: 'Figure out what caused several SGO transfers to fail over the weekend.',
     person: {
       firstName: 'Zacarias',
       lastName: 'Ferreira',

@@ -26,11 +26,7 @@ const LOG_OUT = gql`
 /**
  * Hook to check if the user is logged in (has an access token in local storage) on component mount.
  */
-export default function useLoginStatus(): [
-  boolean,
-  () => void,
-  (accessToken: string) => void
-] {
+export default function useLoginStatus(): [boolean, () => void, (accessToken: string) => void] {
   const { data } = useQuery(IS_LOGGED_IN);
   const logout = useMutation(LOG_OUT);
   const loginMutation = useMutation(LOG_IN);

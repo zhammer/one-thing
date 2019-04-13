@@ -76,11 +76,7 @@ const authErrorAfterware = onError(({ graphQLErrors, operation }) => {
   if (!graphQLErrors) {
     return;
   }
-  if (
-    graphQLErrors.find(
-      err => err.extensions && err.extensions.code === 'UNAUTHENTICATED'
-    )
-  ) {
+  if (graphQLErrors.find(err => err.extensions && err.extensions.code === 'UNAUTHENTICATED')) {
     const { cache } = operation.getContext();
     localStorage.removeItem('accessToken');
     cache.reset();

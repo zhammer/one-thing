@@ -15,9 +15,7 @@ interface ConfettiProps {
 export default function Confetti({ partyTime = false }: ConfettiProps) {
   const [count] = useState(() => Math.floor(window.innerWidth / 20));
   const [particleComponents] = useState(() =>
-    range(count).map(() =>
-      getRandomItem([Particle.Squiggle, Particle.Circular, Particle.Circular])
-    )
+    range(count).map(() => getRandomItem([Particle.Squiggle, Particle.Circular, Particle.Circular]))
   );
 
   if (!partyTime) return <></>;

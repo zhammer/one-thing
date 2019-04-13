@@ -37,9 +37,7 @@ interface Data {
 }
 
 export default function SeatGeekPage() {
-  const { data, error, loading } = useQuery<Data>(
-    GET_THIS_WEEK_SEATGEEK_THINGS
-  );
+  const { data, error, loading } = useQuery<Data>(GET_THIS_WEEK_SEATGEEK_THINGS);
   const things = useMemo(() => pluckThings(data), [data]);
 
   return (
@@ -54,13 +52,12 @@ export default function SeatGeekPage() {
               <Danger>There was an error.</Danger>
             ) : things.length > 0 ? (
               <>
-                Here are the things people at{' '}
-                <SeatGeekBlue>SeatGeek</SeatGeekBlue> want to do this week!
+                Here are the things people at <SeatGeekBlue>SeatGeek</SeatGeekBlue> want to do this
+                week!
               </>
             ) : (
               <>
-                Be the first person to submit your{' '}
-                <SeatGeekBlue>One Thing</SeatGeekBlue> this week!
+                Be the first person to submit your <SeatGeekBlue>One Thing</SeatGeekBlue> this week!
               </>
             )}
           </Subtitle>
