@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from './components/Navbar';
-import { Route, Redirect } from 'react-router';
+import { Route, Redirect, Switch } from 'react-router';
 import MePage from './pages/MePage';
 import SeatGeekPage from './pages/SeatGeekPage';
 import SettingsPage from './pages/SettingsPage';
@@ -16,10 +16,12 @@ export default function AuthenticatedApp() {
     <>
       <Navbar />
       <BesideNav>
-        <Redirect exact from="/" to="/me" />
-        <Route exact path="/me" component={MePage} />
-        <Route exact path="/seatgeek" component={SeatGeekPage} />
-        <Route exact path="/settings" component={SettingsPage} />
+        <Switch>
+          <Route exact path="/me" component={MePage} />
+          <Route exact path="/seatgeek" component={SeatGeekPage} />
+          <Route exact path="/settings" component={SettingsPage} />
+          <Redirect exact from="/" to="/me" />
+        </Switch>
       </BesideNav>
     </>
   );
