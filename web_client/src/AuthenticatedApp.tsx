@@ -16,6 +16,7 @@ export default function AuthenticatedApp() {
     <>
       <Navbar />
       <BesideNav>
+        <Redirect exact from="/" to="/me" />
         <Route exact path="/me" component={MePage} />
         <Route exact path="/seatgeek" component={SeatGeekPage} />
         <Route exact path="/settings" component={SettingsPage} />
