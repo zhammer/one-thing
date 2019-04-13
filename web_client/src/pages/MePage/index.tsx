@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import Page from '../../components/Page';
 import Title from '../../components/Title';
 import gql from 'graphql-tag';
@@ -11,6 +11,7 @@ import Thing from '../../components/Thing';
 import useFocusOnMount from '../../hooks/useFocusOnMount';
 import { getRandomItem } from '../../util';
 import SubtitlePlaceholder from '../../components/SubtitlePlaceholder';
+import Confetti from '../../components/Confetti';
 
 const MY_THING_THIS_WEEK = gql`
   query MyThingThisWeek {
@@ -87,6 +88,7 @@ export default function MePage() {
     [thingInputFormQueryData]
   );
   const focusProps = useFocusOnMount();
+  const [successfullySubmitted, setSuccessfullySubmitted] = useState(false);
 
   function handleFormChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setThingInputForm({
@@ -106,12 +108,16 @@ export default function MePage() {
   }
   function handleCompleteClicked() {
     completeThingThisWeek({
-      refetchQueries: ['MyThingThisWeek']
+      refetchQueries: ['MyThingThisWeek'],
+      update: () => {
+        setSuccessfullySubmitted(true);
+      }
     });
   }
 
   return (
     <Page>
+      <Confetti partyTime={successfullySubmitted} />
       <Title>Me</Title>
       {loading ? (
         <SubtitlePlaceholder />
