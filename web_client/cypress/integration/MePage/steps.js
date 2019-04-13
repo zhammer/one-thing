@@ -180,7 +180,7 @@ Then('the thing input form has one of the following placeholders', rawTable => {
 });
 
 Then('I see confetti!', () => {
-  cy.get('div[data-class-name=confetti]').should('be.visible');
+  cy.get('div[data-class-name=confetti]').should('exist');
 });
 
 function pluckPlaceholders(dataTable) {
