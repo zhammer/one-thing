@@ -62,6 +62,10 @@ When('I visit the Me page', () => {
   cy.visit('/me');
 });
 
+When('I visit the root page', () => {
+  cy.visit('/');
+});
+
 When('I click on the Thing input form', () => {
   cy.get('textarea[data-class-name=thing-input-form')
     .as('thingInputForm')

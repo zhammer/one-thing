@@ -19,11 +19,15 @@ Then(`I see the subtitle {string}`, subtitle => {
 });
 
 Then('I see the subtitle placeholder', () => {
-  cy.get('h2[data-class-name=subtitle-placeholder');
+  cy.get('h2[data-class-name=subtitle-placeholder]');
 });
 
 Then('I dont see the subtitle placeholder', () => {
-  cy.get('h2[data-class-name=subtitle-placeholder').should('not.exist');
+  cy.get('h2[data-class-name=subtitle-placeholder]').should('not.exist');
+});
+
+Then(`I am redirected to the page {string}`, route => {
+  cy.location('pathname').should('eq', route);
 });
 
 function pluckPerson(dataTable) {
