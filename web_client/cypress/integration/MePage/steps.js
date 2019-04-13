@@ -179,6 +179,10 @@ Then('the thing input form has one of the following placeholders', rawTable => {
   });
 });
 
+Then('I see confetti!', () => {
+  cy.get('div[data-class-name=confetti]').should('exist');
+});
+
 function pluckPlaceholders(dataTable) {
   return dataTable.hashes().map(row => row.placeholder);
 }
