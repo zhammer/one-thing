@@ -51,6 +51,7 @@ Feature: Me Page
     And I click the Complete button
     Then I see my thing
     And my thing is complete
+    And I see confetti!
 
   Scenario: I have submitted a Thing this week that I have completed
     Given I have submitted the following thing this week:
