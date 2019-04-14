@@ -77,6 +77,13 @@ Feature: Me Page
     When I visit the root page
     Then I am redirected to the page "/me"
 
+  Scenario: I fix a typo while writing my thing
+    Given I havent submitted a thing this week
+    When I visit the Me page
+    And I click on the Thing input form
+    When I type "Cook my own lundh{leftarrow}{leftarrow}{del}c{rightarrow}!"
+    Then the thing input form has the text "Cook my own lunch!"
+
 #  I can't figure out how to stub an error response from the mock graphql server.
 #  Scenario: There is an auth error fetching my Thing this week
 #    Given there is a problem with my authentication
