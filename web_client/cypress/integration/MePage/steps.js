@@ -187,6 +187,10 @@ Then('I see confetti!', () => {
   cy.get('div[data-class-name=confetti]').should('exist');
 });
 
+Then(`the thing input form has the text {string}`, text => {
+  cy.get('@thingInputForm').should('have.value', text);
+});
+
 function pluckPlaceholders(dataTable) {
   return dataTable.hashes().map(row => row.placeholder);
 }
