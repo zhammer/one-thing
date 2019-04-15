@@ -3,7 +3,7 @@ import Page from '../../components/Page';
 import Title from '../../components/Title';
 import gql from 'graphql-tag';
 import { ThingInterface } from '../../types';
-import { useQuery, useMutation } from 'react-apollo-hooks';
+import { useQuery, useMutation, useApolloClient } from 'react-apollo-hooks';
 import Subtitle from '../../components/Subtitle';
 import Button from '../../components/Button';
 import { Body, ThingTextArea, Danger } from './MePage.styles';
@@ -37,14 +37,6 @@ interface MyThingThisWeekQueryData {
   };
 }
 
-const SET_THING_INPUT_FORM = gql`
-  mutation SetThingInputForm($text: String!) {
-    setThingInputForm(text: $text) @client {
-      success
-    }
-  }
-`;
-
 const THING_INPUT_FORM = gql`
   query ThingInputForm {
     thingInputForm @client
@@ -75,7 +67,7 @@ export default function MePage() {
   const { data: thingInputFormQueryData } = useQuery<{
     thingInputForm: string;
   }>(THING_INPUT_FORM);
-  const setThingInputForm = useMutation(SET_THING_INPUT_FORM);
+  const apolloClient = useApolloClient();
   const submitThing = useMutation(SUBMIT_THING);
   const completeThingThisWeek = useMutation(COMPLETE_THING_THIS_WEEK);
   const thingThisWeek = useMemo(() => pluckThingThisWeek(myThingThisWeekQueryData), [
@@ -89,8 +81,9 @@ export default function MePage() {
   const [successfullySubmitted, setSuccessfullySubmitted] = useState(false);
 
   function handleFormChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
-    setThingInputForm({
-      variables: { text: event.target.value }
+    apolloClient.writeQuery({
+      query: THING_INPUT_FORM,
+      data: { thingInputForm: event.target.value }
     });
   }
   function handleSubmitClicked() {
